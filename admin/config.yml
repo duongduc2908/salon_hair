@@ -3,7 +3,7 @@
 
 backend:
   name: github
-  repo: YOUR-GITHUB-USERNAME/long-hair-salon   # ← đổi thành repo GitHub của bạn
+  repo: duongduc2908/salon_hair
   branch: main
   commit_messages:
     update: "Cập nhật {{collection}} “{{slug}}”"
@@ -14,8 +14,8 @@ backend:
 local_backend: true
 
 locale: vi
-site_url: https://long-hair-salon.netlify.app        # ← đổi thành địa chỉ web thật
-display_url: https://long-hair-salon.netlify.app
+site_url: https://profound-unicorn-9725a5.netlify.app
+display_url: https://profound-unicorn-9725a5.netlify.app
 
 media_folder: photos/uploads
 public_folder: /photos/uploads
