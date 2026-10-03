@@ -1,0 +1,926 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Long Hair Salon</title>
+<meta name="description" content="Long Hair Salon – Tóc đẹp từ tâm, nâng tầm mái tóc. Cắt, uốn, duỗi, nhuộm, phục hồi tại 284 Quang Trung, Hà Đông. Hotline 033 318 8683.">
+<meta property="og:title" content="Long Hair Salon – Tóc đẹp từ tâm">
+<meta property="og:description" content="Cắt, uốn, duỗi, nhuộm, phục hồi tại 284 Quang Trung, Hà Đông.">
+<meta property="og:image" content="photos/hero.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Fraunces:ital,opsz,wght@1,9..144,400&display=swap">
+<style>
+/* ---------- Tokens ---------- */
+:root{
+  --bg:#ECEEF2;
+  --surface:#FFFFFF;
+  --surface-2:#E2E4EA;
+  --ink:#16131C;
+  --muted:#5F5B6A;
+  --line:#D2D4DB;
+  --accent:#E0234E;
+  --accent-ink:#FFFFFF;
+  --butter:#F6E05E;
+  --butter-ink:#16131C;
+  --ring:conic-gradient(from 210deg,#E0234E,#F6E05E,#FF8A3D,#E0234E);
+  --shadow:0 18px 40px -18px rgba(22,19,28,.35);
+
+  /* All three faces include the Vietnamese subset */
+  --f-display:"Bricolage Grotesque","Arial Black","Helvetica Neue",sans-serif;
+  --f-serif:"Fraunces","Times New Roman",Georgia,serif;
+  --f-body:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",sans-serif;
+
+  --gutter:clamp(16px,4vw,40px);
+  --radius:22px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#100E14; --surface:#1B1821; --surface-2:#241F2C; --ink:#F3F0F5; --muted:#A6A1B0;
+    --line:#2F2A37; --accent:#FF4D6D; --accent-ink:#16131C; --butter:#F2DC5D; --butter-ink:#16131C;
+    --shadow:0 18px 40px -18px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#100E14; --surface:#1B1821; --surface-2:#241F2C; --ink:#F3F0F5; --muted:#A6A1B0;
+  --line:#2F2A37; --accent:#FF4D6D; --accent-ink:#16131C; --butter:#F2DC5D; --butter-ink:#16131C;
+  --shadow:0 18px 40px -18px rgba(0,0,0,.7);
+}
+
+/* ---------- Base ---------- */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--f-body);overflow-x:clip;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3{font-family:var(--f-display);line-height:.95;letter-spacing:-.035em;margin:0;text-wrap:balance}
+/* Vietnamese stacks diacritics above capitals; give lines room */
+html[lang="vi"] h1,html[lang="vi"] h2{line-height:1.06}
+em.s{font-family:var(--f-serif);font-style:italic;font-weight:400;letter-spacing:-.02em;color:var(--accent)}
+p{margin:0}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1200px;margin-inline:auto;padding-inline:var(--gutter)}
+.eyebrow{font:600 12px/1.2 var(--f-body);text-transform:uppercase;letter-spacing:.14em;color:var(--muted)}
+.btn{display:inline-flex;align-items:center;gap:.5em;font:700 15px/1 var(--f-body);padding:15px 22px;border-radius:999px;border:2px solid var(--ink);background:var(--ink);color:var(--bg);text-decoration:none;cursor:pointer;transition:transform .2s ease,background .2s ease,color .2s ease;white-space:nowrap}
+.btn:hover{transform:translateY(-2px)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.accent{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+section{padding-block:clamp(64px,9vw,120px)}
+.sec-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:16px 40px;margin-bottom:clamp(28px,4vw,48px)}
+.sec-head h2{font-size:clamp(2.4rem,6vw,4.6rem);font-weight:800;margin-top:12px}
+.sec-head p{max-width:42ch;color:var(--muted)}
+
+.load-error{margin:0;padding:12px var(--gutter);background:var(--butter);color:var(--butter-ink);font-weight:600;text-align:center}
+
+/* ---------- Header ---------- */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;height:68px}
+.logo{font:800 26px/1 var(--f-display);letter-spacing:-.05em;text-decoration:none;white-space:nowrap}
+.logo span{color:var(--accent)}
+.nav{display:flex;gap:28px;font-weight:600;font-size:15px}
+.nav a{text-decoration:none;opacity:.8}
+.nav a:hover{opacity:1;color:var(--accent)}
+.top-right{display:flex;align-items:center;gap:10px}
+.top .btn{padding:11px 18px;font-size:14px}
+.lang{display:inline-flex;border:1.5px solid var(--line);border-radius:999px;padding:3px;background:var(--surface)}
+.lang button{font:700 12px/1 var(--f-body);letter-spacing:.06em;border:0;background:transparent;color:var(--muted);padding:8px 10px;border-radius:999px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+@media (max-width:860px){.nav{display:none}}
+@media (max-width:420px){.logo{font-size:20px}.lang button{padding:7px 8px}}
+@media (max-width:380px){.top .btn{padding:10px 13px}}
+
+/* ---------- Hero ---------- */
+.hero{padding-block:clamp(40px,6vw,80px) clamp(48px,6vw,80px)}
+.hero .wrap{display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(32px,5vw,72px);align-items:center}
+.hero h1{font-size:clamp(3rem,9vw,7.6rem);font-weight:800;line-height:.88;letter-spacing:-.05em;margin-top:18px}
+.hero h1 em.s{font-size:1.04em;letter-spacing:-.03em;padding-right:.04em}
+.hero .lede{margin-top:28px;font-size:clamp(17px,1.6vw,20px);max-width:40ch;color:var(--muted)}
+.hero .lede b{color:var(--ink);font-weight:700}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.hero-copy{position:relative}
+.sticker{position:absolute;top:-14px;right:4%;transform:rotate(8deg);background:var(--butter);color:var(--butter-ink);font:700 13px/1.15 var(--f-body);padding:12px 16px;border-radius:999px;text-align:center;box-shadow:var(--shadow)}
+.sticker b{display:block;font:800 22px/1 var(--f-display);letter-spacing:-.03em}
+.proof{display:flex;flex-wrap:wrap;gap:24px 36px;margin-top:40px;padding-top:24px;border-top:1px solid var(--line)}
+.proof div{display:grid;gap:2px}
+.proof b{font:800 26px/1 var(--f-display);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.proof span{font-size:13px;color:var(--muted)}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr}.sticker{top:-30px;right:0}}
+
+/* Hero post card */
+.post{background:var(--surface);border-radius:28px;padding:12px;box-shadow:var(--shadow);max-width:420px;width:100%;justify-self:center;transform:rotate(-2deg);transition:transform .4s ease}
+.post:hover{transform:rotate(0)}
+.post-head{display:flex;align-items:center;gap:10px;padding:4px 6px 12px}
+.av{width:36px;height:36px;border-radius:50%;padding:2px;background:var(--ring);flex:none}
+.av span{display:grid;place-items:center;width:100%;height:100%;border-radius:50%;border:2px solid var(--surface);background:var(--ink);color:var(--bg);font:800 11px/1 var(--f-display)}
+.post-head b{font-size:14px}
+.post-head small{display:block;font-size:12px;color:var(--muted);line-height:1.3}
+.post-img{aspect-ratio:4/5;max-width:100%;width:100%;height:auto;border-radius:18px;object-fit:cover;object-position:50% 20%;background:var(--surface-2)}
+.post-foot{padding:12px 6px 4px;font-size:14px;display:grid;gap:4px}
+.post-foot .acts{display:flex;gap:14px;font-size:20px}
+.post-foot p{color:var(--muted)}
+.post-foot p b{color:var(--ink)}
+
+/* ---------- Marquee ---------- */
+.ticker{background:var(--accent);color:var(--accent-ink);overflow:hidden;padding-block:14px;transform:rotate(-1.2deg);margin-block:8px;border-block:2px solid var(--ink)}
+.ticker .track{display:flex;width:max-content;gap:40px;animation:slide 40s linear infinite;font:800 clamp(18px,2.4vw,26px)/1.1 var(--f-display);letter-spacing:-.02em;white-space:nowrap}
+.ticker .track span::after{content:"✳";margin-left:40px;font-weight:400}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* ---------- Highlights ---------- */
+.highlights{padding-block:clamp(48px,6vw,72px) 0}
+.hl-row{display:flex;gap:clamp(14px,3vw,34px);overflow-x:auto;padding:6px 4px 14px;scrollbar-width:none}
+.hl-row::-webkit-scrollbar{display:none}
+.hl{flex:none;display:grid;justify-items:center;gap:10px;background:none;border:0;color:var(--ink);font:600 13px/1.25 var(--f-body);cursor:pointer;width:90px;text-align:center}
+.hl .ring{width:84px;height:84px;border-radius:50%;padding:3px;background:var(--ring);transition:transform .25s ease}
+.hl:hover .ring{transform:scale(1.06) rotate(-6deg)}
+.hl .ring img{width:100%;height:100%;border-radius:50%;border:3px solid var(--bg);object-fit:cover}
+
+/* ---------- Before / after ---------- */
+.ba-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(10px,2vw,20px)}
+.ba-card{margin:0;background:var(--surface);border-radius:var(--radius);padding:10px 10px 16px;display:grid;gap:12px;align-content:start}
+.ba-card img{width:100%;height:auto;aspect-ratio:1;object-fit:cover;border-radius:14px;max-width:100%}
+.ba-card figcaption{padding-inline:6px;display:grid;gap:2px}
+.ba-card figcaption b{font:700 19px/1.25 var(--f-display);letter-spacing:-.015em}
+.ba-card figcaption span{font-size:14px;color:var(--muted)}
+@media (max-width:560px){.ba-grid{grid-template-columns:1fr}}
+
+/* ---------- Menu ---------- */
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.tab{font:700 14px/1 var(--f-body);padding:12px 18px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.tab[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.menu-grid{display:grid;grid-template-columns:1fr 320px;gap:clamp(24px,4vw,56px);align-items:start}
+.svc{list-style:none;margin:0;padding:0;border-top:2px solid var(--ink)}
+.svc li{display:grid;grid-template-columns:1fr auto auto;gap:6px 28px;align-items:baseline;padding:20px 0;border-bottom:1px solid var(--line)}
+.svc h3{font:700 clamp(20px,2.2vw,26px)/1.2 var(--f-display);letter-spacing:-.02em}
+.svc .note{grid-column:1/-1;font-size:14px;color:var(--muted);max-width:60ch}
+.svc .dur{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.svc .price{font:700 20px/1 var(--f-body);font-variant-numeric:tabular-nums;white-space:nowrap}
+.svc .price small{font-size:12px;font-weight:500;color:var(--muted);margin-right:4px}
+.menu-note{margin-top:16px;font-size:13px;color:var(--muted)}
+.aside-card{background:var(--butter);color:var(--butter-ink);border-radius:var(--radius);padding:26px;display:grid;gap:14px;position:sticky;top:96px}
+.aside-card h3{font-size:28px}
+.aside-card ul{margin:0;padding-left:18px;display:grid;gap:8px;font-size:15px}
+@media (max-width:880px){.menu-grid{grid-template-columns:1fr}.aside-card{position:static}}
+@media (max-width:520px){.svc li{grid-template-columns:1fr auto}.svc .dur{grid-column:1;grid-row:3}}
+
+/* ---------- Grid feed ---------- */
+.profile{display:flex;flex-wrap:wrap;align-items:center;gap:20px 32px;margin-bottom:28px}
+.profile .big-av{width:96px;height:96px;border-radius:50%;padding:3px;background:var(--ring);flex:none}
+.profile .big-av i{display:grid;place-items:center;width:100%;height:100%;border-radius:50%;background:var(--ink);color:var(--bg);font:800 28px/1 var(--f-display);font-style:normal;border:3px solid var(--bg)}
+.profile .stats{display:flex;gap:28px;font-size:14px;color:var(--muted)}
+.profile .stats b{display:block;font:800 22px/1.1 var(--f-display);color:var(--ink);font-variant-numeric:tabular-nums}
+.feed{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(4px,1vw,10px)}
+.tile{position:relative;aspect-ratio:1;max-width:100%;overflow:hidden;border-radius:clamp(4px,1vw,14px);margin:0;background:var(--surface-2)}
+.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.tile:hover img{transform:scale(1.05)}
+.tile figcaption{position:absolute;left:0;right:0;bottom:0;padding:32px 12px 12px;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.65));font-size:13px;line-height:1.25;display:grid;gap:2px}
+.tile figcaption b{font-size:clamp(13px,1.5vw,16px)}
+.tile figcaption small{font-size:11px;letter-spacing:.06em;opacity:.85}
+@media (max-width:560px){.tile figcaption small{display:none}.tile figcaption{padding:20px 8px 8px}}
+
+/* ---------- Space + promises ---------- */
+.space{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(24px,4vw,56px);align-items:start}
+.photos{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.photos img{width:100%;height:100%;object-fit:cover;border-radius:16px;max-width:100%}
+.photos .wide{grid-column:1/-1;aspect-ratio:16/10}
+.photos .sq{aspect-ratio:1}
+.promises{list-style:none;margin:0;padding:0;border-top:2px solid var(--ink)}
+.promises li{display:grid;grid-template-columns:auto 1fr;gap:4px 18px;padding:20px 0;border-bottom:1px solid var(--line)}
+.promises li::before{content:"★";grid-row:span 2;color:var(--accent);font-size:20px;line-height:1.3}
+.promises b{font:700 20px/1.25 var(--f-display);letter-spacing:-.015em}
+.promises span{font-size:14px;color:var(--muted)}
+@media (max-width:880px){.space{grid-template-columns:1fr}}
+
+/* ---------- Book ---------- */
+.book{background:var(--ink);color:var(--bg);border-radius:clamp(24px,4vw,44px);margin-inline:clamp(8px,1.5vw,20px)}
+.book .eyebrow{color:color-mix(in srgb,var(--bg) 60%,var(--ink))}
+.book .sec-head p{color:color-mix(in srgb,var(--bg) 70%,var(--ink))}
+.book-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(24px,4vw,56px);align-items:start}
+form{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.field{display:grid;gap:8px;min-width:0}
+.field.full{grid-column:1/-1}
+label,.legend{font-size:13px;font-weight:600;letter-spacing:.04em}
+input[type=text],input[type=tel],input[type=date],select,textarea{width:100%;font:500 16px/1.3 var(--f-body);color:var(--bg);background:color-mix(in srgb,var(--bg) 8%,var(--ink));border:1.5px solid color-mix(in srgb,var(--bg) 22%,var(--ink));border-radius:14px;padding:14px 16px;color-scheme:dark}
+:root[data-theme="dark"] .book :is(input,select,textarea){color-scheme:light}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .book :is(input,select,textarea){color-scheme:light}}
+textarea{resize:vertical;min-height:90px}
+input::placeholder,textarea::placeholder{color:color-mix(in srgb,var(--bg) 45%,var(--ink))}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent)}
+fieldset{border:0;margin:0;padding:0;display:grid;gap:8px;min-width:0}
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg label{padding:11px 16px;border-radius:999px;border:1.5px solid color-mix(in srgb,var(--bg) 22%,var(--ink));cursor:pointer;font-weight:600;letter-spacing:0;font-size:14px}
+.seg input:checked+label{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.seg input:focus-visible+label{outline:3px solid var(--butter);outline-offset:2px}
+.drop{display:flex;align-items:center;gap:14px;padding:14px;border:1.5px dashed color-mix(in srgb,var(--bg) 30%,var(--ink));border-radius:14px;cursor:pointer;letter-spacing:0}
+.drop.over{border-color:var(--accent)}
+.drop .thumb{width:56px;height:56px;border-radius:10px;flex:none;background:color-mix(in srgb,var(--bg) 10%,var(--ink)) center/cover no-repeat;display:grid;place-items:center;font-size:22px}
+.drop small{display:block;color:color-mix(in srgb,var(--bg) 60%,var(--ink));font-size:13px;font-weight:400}
+.err{grid-column:1/-1;color:var(--butter);font-weight:600;font-size:14px}
+.dm{background:color-mix(in srgb,var(--bg) 6%,var(--ink));border:1.5px solid color-mix(in srgb,var(--bg) 18%,var(--ink));border-radius:var(--radius);padding:22px;display:grid;gap:14px;position:sticky;top:96px}
+.dm h3{font-size:26px}
+.bubble{background:var(--accent);color:var(--accent-ink);border-radius:20px 20px 6px 20px;padding:16px 18px;white-space:pre-wrap;font-size:14.5px;line-height:1.5;max-height:340px;overflow:auto}
+.bubble.empty{background:transparent;border:1.5px dashed color-mix(in srgb,var(--bg) 25%,var(--ink));color:color-mix(in srgb,var(--bg) 55%,var(--ink))}
+.dm .row{display:flex;flex-wrap:wrap;gap:10px}
+.dm .btn{background:var(--bg);color:var(--ink);border-color:var(--bg)}
+.dm .btn.ghost{background:transparent;color:var(--bg)}
+.dm small{font-size:13px;color:color-mix(in srgb,var(--bg) 60%,var(--ink))}
+.dm small b{color:var(--bg);user-select:all}
+@media (max-width:900px){.book-grid{grid-template-columns:1fr}.dm{position:static}}
+@media (max-width:560px){form{grid-template-columns:1fr}}
+
+/* ---------- Visit ---------- */
+.visit-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,56px);align-items:start}
+.visit-card{background:var(--surface);border-radius:var(--radius);overflow:hidden;display:grid}
+.visit-card img{width:100%;height:auto;aspect-ratio:16/11;object-fit:cover;object-position:50% 60%;max-width:100%}
+.visit-card .body{padding:24px;display:grid;gap:16px}
+.addr b{display:block;font:800 26px/1.15 var(--f-display);letter-spacing:-.02em}
+.addr span{color:var(--muted)}
+.contact{display:grid;gap:10px;font-size:15px}
+.contact div{display:flex;justify-content:space-between;gap:16px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.contact span{color:var(--muted)}
+.contact b{font-variant-numeric:tabular-nums;text-align:right}
+.contact a{color:var(--accent);text-decoration:none;font-weight:700}
+.score{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;margin-bottom:14px}
+.score b{font:800 44px/1 var(--f-display);letter-spacing:-.04em}
+.score span{color:var(--muted);font-size:14px}
+.reviews{display:grid;gap:12px;margin-bottom:28px}
+.quote{margin:0;background:var(--surface);border-radius:var(--radius);padding:20px 22px;display:grid;gap:8px}
+.quote p{font:400 20px/1.35 var(--f-serif);font-style:italic}
+.quote cite{font-size:13px;color:var(--muted);font-style:normal}
+.faq details{border-bottom:1px solid var(--line);padding:18px 0}
+.faq details:first-child{border-top:2px solid var(--ink)}
+.faq summary{cursor:pointer;font:700 19px/1.3 var(--f-display);letter-spacing:-.015em;list-style:none;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--f-body);font-weight:500;font-size:24px;line-height:1;transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{margin-top:10px;color:var(--muted);max-width:60ch}
+@media (max-width:820px){.visit-grid{grid-template-columns:1fr}}
+
+/* ---------- Footer ---------- */
+.site-foot{background:var(--ink);color:var(--bg);padding-block:clamp(48px,7vw,80px) 28px}
+.site-foot .wrap{display:grid;gap:clamp(32px,5vw,56px)}
+.foot-brand{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:20px 40px;padding-bottom:clamp(28px,4vw,40px);border-bottom:1px solid color-mix(in srgb,var(--bg) 18%,var(--ink))}
+.foot-brand .wordmark{font:800 clamp(3.2rem,11vw,8.5rem)/1 var(--f-display);letter-spacing:-.045em;margin:0;white-space:nowrap}
+.wordmark span{color:var(--accent)}
+.foot-brand .slogan{font:400 clamp(20px,2.4vw,28px)/1.3 var(--f-serif);font-style:italic;max-width:24ch;text-wrap:balance;color:color-mix(in srgb,var(--bg) 80%,var(--ink))}
+.foot-cols{display:grid;grid-template-columns:repeat(3,1fr) auto;gap:28px 40px;align-items:start}
+.foot-cols h3{font:600 12px/1.2 var(--f-body);text-transform:uppercase;letter-spacing:.14em;color:color-mix(in srgb,var(--bg) 55%,var(--ink));margin-bottom:12px}
+.foot-cols p,.foot-cols li{font-size:15px;line-height:1.7}
+.foot-cols ul{list-style:none;margin:0;padding:0}
+.foot-cols a{text-decoration:none;font-weight:600}
+.foot-cols a:hover{color:var(--accent)}
+.foot-cols .btn{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.foot-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;padding-top:20px;border-top:1px solid color-mix(in srgb,var(--bg) 18%,var(--ink));font-size:13px;color:color-mix(in srgb,var(--bg) 55%,var(--ink))}
+.foot-bottom a{text-decoration:none;font-weight:600;color:var(--bg)}
+@media (max-width:900px){.foot-cols{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.foot-cols{grid-template-columns:1fr}}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<!--
+  Content (prices, photos, contact, hours, reviews, FAQ…) lives in /content/*.json and is edited at /admin.
+  This file holds the layout and the fixed interface text (STR.vi / STR.en in the script).
+  In STR, {key} is replaced with the matching field from content/salon.json.
+-->
+
+<p class="load-error" id="load-error" hidden></p>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Long Hair Salon">long hair<span>.</span></a>
+    <nav class="nav" aria-label="Main">
+      <a href="#menu" data-i18n="nav.menu">Bảng giá</a>
+      <a href="#grid" data-i18n="nav.grid">Tác phẩm</a>
+      <a href="#space" data-i18n="nav.space">Không gian</a>
+      <a href="#visit" data-i18n="nav.visit">Ghé tiệm</a>
+    </nav>
+    <div class="top-right">
+      <div class="lang" role="group" aria-label="Ngôn ngữ / Language">
+        <button type="button" data-lang="vi" aria-pressed="true" lang="vi">VI</button>
+        <button type="button" data-lang="en" aria-pressed="false" lang="en">EN</button>
+      </div>
+      <a class="btn accent" href="#book" data-i18n="cta.book">Đặt lịch</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <!-- ===== Hero ===== -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <div class="sticker" aria-hidden="true" data-i18n="hero.sticker"></div>
+        <p class="eyebrow" data-i18n="hero.eyebrow">Long Hair Salon</p>
+        <h1 data-i18n="hero.h1">Tóc đẹp <em class="s">từ tâm.</em></h1>
+        <p class="lede" data-i18n="hero.lede"></p>
+        <div class="ctas">
+          <a class="btn accent" href="#book" data-i18n="hero.cta1">Đặt lịch ngay →</a>
+          <a class="btn ghost" href="#grid" data-i18n="hero.cta2">Xem tác phẩm</a>
+        </div>
+        <div class="proof">
+          <div><b data-bind="recommend"></b><span data-i18n="proof.reviews"></span></div>
+          <div><b data-bind="followers"></b><span data-i18n="proof.followers"></span></div>
+          <div><b data-bind="street_no"></b><span data-i18n="proof.addr"></span></div>
+        </div>
+      </div>
+
+      <article class="post" data-i18n-aria="post.aria">
+        <div class="post-head">
+          <span class="av"><span>LH</span></span>
+          <div><b data-bind="name">Long Hair Salon</b><small data-i18n="post.sub"></small></div>
+        </div>
+        <img class="post-img" id="hero-img" width="1050" height="1400" alt="">
+        <div class="post-foot">
+          <div class="acts" aria-hidden="true"><span>♡</span><span>💬</span><span>↗</span></div>
+          <p><b data-bind="name">Long Hair Salon</b> <span data-bind="hero_caption"></span></p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <div class="ticker" aria-hidden="true"><div class="track" id="ticker"></div></div>
+
+  <!-- ===== Highlights ===== -->
+  <section class="highlights" data-i18n-aria="hl.aria">
+    <div class="wrap"><div class="hl-row" id="hl-row"></div></div>
+  </section>
+
+  <!-- ===== Before / after ===== -->
+  <section id="before-after" style="padding-bottom:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="eyebrow" data-i18n="ba.eyebrow">Trước &amp; sau</p><h2 data-i18n="ba.h2">Khác biệt <em class="s">thấy rõ.</em></h2></div>
+        <p data-i18n="ba.p"></p>
+      </div>
+      <div class="ba-grid" id="ba-grid"></div>
+    </div>
+  </section>
+
+  <!-- ===== Menu ===== -->
+  <section id="menu">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="eyebrow" data-i18n="menu.eyebrow">Bảng giá</p><h2 data-i18n="menu.h2">Chọn <em class="s">vibe</em> của bạn.</h2></div>
+        <p data-i18n="menu.p"></p>
+      </div>
+      <div class="tabs" role="tablist" id="tabs"></div>
+      <div class="menu-grid">
+        <div>
+          <ul class="svc" id="svc" role="tabpanel"></ul>
+          <p class="menu-note" data-i18n="menu.note"></p>
+        </div>
+        <aside class="aside-card">
+          <p class="eyebrow" style="color:inherit;opacity:.7" data-i18n="aside.eyebrow">Trước khi làm tóc</p>
+          <h3 data-i18n="aside.h3">Đọc trước nhé</h3>
+          <ul data-i18n="aside.list"></ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Grid ===== -->
+  <section id="grid" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="eyebrow" data-i18n="grid.eyebrow">Tác phẩm</p><h2 data-i18n="grid.h2">Nóng hổi <em class="s">vừa ra lò.</em></h2></div>
+        <p data-i18n="grid.p"></p>
+      </div>
+      <div class="profile">
+        <span class="big-av"><i>LH</i></span>
+        <div>
+          <b style="font-size:18px" data-bind="name">Long Hair Salon</b>
+          <p style="color:var(--muted);font-size:14px" data-i18n="grid.bio"></p>
+        </div>
+        <div class="stats">
+          <div><b data-bind="followers"></b><span data-i18n="grid.followers"></span></div>
+          <div><b data-bind="reviews"></b><span data-i18n="grid.reviews"></span></div>
+        </div>
+        <a class="btn ghost" data-bind-href="facebook" href="#" target="_blank" rel="noopener" style="padding:11px 18px;font-size:14px" data-i18n="grid.follow">Facebook ↗</a>
+      </div>
+      <div class="feed" id="feed"></div>
+    </div>
+  </section>
+
+  <!-- ===== Space + promises ===== -->
+  <section id="space" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="eyebrow" data-i18n="space.eyebrow">Không gian &amp; cam kết</p><h2 data-i18n="space.h2">Làm tóc <em class="s">bằng cả tâm.</em></h2></div>
+        <p data-i18n="space.p"></p>
+      </div>
+      <div class="space">
+        <div class="photos">
+          <img class="wide" data-bind-src="space_image_1" width="1290" height="921" loading="lazy" data-i18n-alt="space.alt1" alt="">
+          <img class="sq" data-bind-src="space_image_2" width="414" height="414" loading="lazy" data-i18n-alt="space.alt2" alt="">
+          <img class="sq" data-bind-src="space_image_3" width="414" height="414" loading="lazy" style="object-position:30% 50%" data-i18n-alt="space.alt3" alt="">
+        </div>
+        <ul class="promises" id="promises"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Book ===== -->
+  <section id="book" class="book">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="eyebrow" data-i18n="book.eyebrow">Đặt lịch</p><h2 data-i18n="book.h2">Inbox <em class="s">tụi mình</em> nha.</h2></div>
+        <p data-i18n="book.p"></p>
+      </div>
+      <div class="book-grid">
+        <form id="book-form" novalidate>
+          <div class="field full">
+            <label for="f-service" data-i18n="f.service">Dịch vụ</label>
+            <select id="f-service" required></select>
+          </div>
+          <div class="field">
+            <label for="f-date" data-i18n="f.date">Ngày mong muốn</label>
+            <input type="date" id="f-date">
+          </div>
+          <fieldset class="field">
+            <span class="legend" data-i18n="f.when">Buổi</span>
+            <div class="seg">
+              <input type="radio" name="when" id="w-am" value="am"><label for="w-am" data-i18n="when.am">Sáng</label>
+              <input type="radio" name="when" id="w-pm" value="pm" checked><label for="w-pm" data-i18n="when.pm">Chiều</label>
+              <input type="radio" name="when" id="w-eve" value="eve"><label for="w-eve" data-i18n="when.eve">Tối</label>
+            </div>
+          </fieldset>
+          <div class="field">
+            <label for="f-name" data-i18n="f.name">Tên của bạn</label>
+            <input type="text" id="f-name" autocomplete="given-name" data-i18n-ph="f.name.ph" required>
+          </div>
+          <div class="field">
+            <label for="f-phone" data-i18n="f.phone">Số điện thoại / Zalo</label>
+            <input type="tel" id="f-phone" autocomplete="tel" inputmode="tel" data-i18n-ph="f.phone.ph">
+          </div>
+          <div class="field full">
+            <span class="legend" data-i18n="f.inspo">Ảnh mẫu (không bắt buộc)</span>
+            <label class="drop" id="drop" for="f-file">
+              <span class="thumb" id="thumb">📸</span>
+              <span><b id="drop-label" data-i18n="f.inspo.add">Thêm ảnh</b><small data-i18n="f.inspo.help"></small></span>
+            </label>
+            <input type="file" id="f-file" accept="image/*" hidden>
+          </div>
+          <div class="field full">
+            <label for="f-notes" data-i18n="f.notes">Ghi chú</label>
+            <textarea id="f-notes" data-i18n-ph="f.notes.ph"></textarea>
+          </div>
+          <p class="err" id="err" hidden></p>
+          <div class="field full"><button class="btn accent" type="submit" style="justify-self:start" data-i18n="f.submit">Soạn tin nhắn →</button></div>
+        </form>
+
+        <aside class="dm" aria-live="polite">
+          <p class="eyebrow" data-i18n="dm.eyebrow">Tin nhắn của bạn</p>
+          <h3 id="dm-title" data-i18n="dm.preview">Xem trước</h3>
+          <div class="bubble empty" id="bubble" data-i18n="dm.empty"></div>
+          <div class="row" id="dm-actions" hidden>
+            <button class="btn" type="button" id="copy" data-i18n="dm.copy">Sao chép tin nhắn</button>
+            <a class="btn ghost" data-bind-href="messenger" href="#" target="_blank" rel="noopener">Messenger ↗</a>
+            <a class="btn ghost" data-bind-href="zalo" href="#" target="_blank" rel="noopener">Zalo ↗</a>
+          </div>
+          <small><span data-i18n="dm.call">Hotline</span> <b data-bind="hotline"></b></small>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Visit ===== -->
+  <section id="visit" style="padding-bottom:clamp(48px,6vw,80px)">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="eyebrow" data-i18n="visit.eyebrow">Ghé tiệm</p><h2 data-i18n="visit.h2">Ghé <em class="s">chơi</em> nha.</h2></div>
+      </div>
+      <div class="visit-grid">
+        <div class="visit-card">
+          <img data-bind-src="storefront_image" width="1400" height="1400" loading="lazy" data-i18n-alt="visit.alt" alt="">
+          <div class="body">
+            <div class="addr">
+              <b data-bind="address"></b>
+              <span data-bind="city"></span>
+            </div>
+            <div class="contact">
+              <div><span data-i18n="visit.hotline">Hotline / Zalo</span><b data-bind="hotline" style="user-select:all"></b></div>
+              <div><span data-i18n="visit.hours">Giờ mở cửa</span><b data-bind="hours"></b></div>
+              <div><span>Facebook</span><a data-bind-href="facebook" href="#" target="_blank" rel="noopener"><span data-bind="name">Long Hair Salon</span> ↗</a></div>
+            </div>
+            <a class="btn ghost" data-bind-href="map" href="#" target="_blank" rel="noopener" style="justify-self:start" data-i18n="visit.dir">Google Maps ↗</a>
+          </div>
+        </div>
+        <div>
+          <div class="score"><b data-bind="recommend"></b><span data-i18n="visit.score"></span></div>
+          <div class="reviews" id="reviews"></div>
+          <div class="faq" id="faq"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-brand">
+      <p class="wordmark" aria-hidden="true">long hair<span>.</span></p>
+      <p class="slogan" data-bind="slogan"></p>
+    </div>
+    <div class="foot-cols">
+      <div>
+        <h3 data-i18n="foot.addr">Địa chỉ</h3>
+        <p><span data-bind="address"></span><br><span data-bind="city"></span></p>
+        <p><a data-bind-href="map" href="#" target="_blank" rel="noopener" data-i18n="foot.map">Xem bản đồ ↗</a></p>
+      </div>
+      <div>
+        <h3 data-i18n="foot.contact">Liên hệ</h3>
+        <ul>
+          <li><span data-i18n="visit.hotline">Hotline / Zalo</span>: <b data-bind="hotline" style="user-select:all"></b></li>
+          <li><a data-bind-href="facebook" href="#" target="_blank" rel="noopener">Facebook ↗</a></li>
+          <li><a data-bind-href="zalo" href="#" target="_blank" rel="noopener">Zalo ↗</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 data-i18n="visit.hours">Giờ mở cửa</h3>
+        <p data-bind="hours"></p>
+      </div>
+      <a class="btn" href="#book" data-i18n="hero.cta1">Đặt lịch ngay →</a>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="yr">2026</span> <span data-bind="name">Long Hair Salon</span></span>
+      <a href="#top" data-i18n="foot.top">Lên đầu trang ↑</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(() => {
+  /* =========================================================
+     Fixed interface text. {key} is filled from content/salon.json
+     (key_vi / key_en for the current language, otherwise key).
+     ========================================================= */
+  const STR = {
+    vi: {
+      "nav.menu": "Bảng giá", "nav.grid": "Tác phẩm", "nav.space": "Không gian", "nav.visit": "Ghé tiệm",
+      "cta.book": "Đặt lịch",
+      "hero.sticker": "<b>{recommend}</b>khách<br>đề xuất",
+      "hero.eyebrow": "{name} · {city}",
+      "hero.h1": 'Tóc đẹp <em class="s">từ tâm.</em>',
+      "hero.lede": "<b>Nâng tầm mái tóc.</b> Cứ mang ảnh mẫu tới. Tụi mình tư vấn đúng nhu cầu, báo giá rõ ràng trước khi làm, rồi làm cho ngoài đời còn đẹp hơn trong ảnh.",
+      "hero.cta1": "Đặt lịch ngay →", "hero.cta2": "Xem tác phẩm",
+      "proof.reviews": "đề xuất · {reviews} đánh giá Facebook", "proof.followers": "người theo dõi Facebook", "proof.addr": "{street}, {city}",
+      "post.aria": "Bài đăng mới của tiệm", "post.sub": "{address}, {city}",
+      "hl.aria": "Xem theo kiểu tóc",
+      "ba.eyebrow": "Trước &amp; sau", "ba.h2": 'Khác biệt <em class="s">thấy rõ.</em>',
+      "ba.p": "Khách thật của tiệm, chụp ngay tại ghế.",
+      "menu.eyebrow": "Bảng giá",
+      "menu.h2": 'Chọn <em class="s">vibe</em> của bạn.',
+      "menu.p": "Báo giá công khai, minh bạch. Giá dưới đây tính cho tóc ngắn đến ngang vai; tóc dài hoặc dày sẽ được báo giá trước khi làm.",
+      "menu.note": "Giá đơn vị nghìn đồng (K = 1.000₫).",
+      "aside.eyebrow": "Trước khi làm tóc", "aside.h3": "Đọc trước nhé",
+      "aside.list": "<li>Hẹn trước 2–3 ngày để được chọn giờ đẹp.</li><li>Lưu 2–3 ảnh mẫu, kèm một ảnh bạn <em>không</em> thích.</li><li>Báo cho tiệm nếu tóc từng tẩy, nhuộm hộp hoặc uốn duỗi gần đây.</li><li>Đổi màu lớn (tối → sáng) có thể cần hai buổi để giữ tóc khỏe.</li>",
+      "grid.eyebrow": "Tác phẩm",
+      "grid.h2": 'Nóng hổi <em class="s">vừa ra lò.</em>',
+      "grid.p": "Khách thật, ánh sáng thật. Thích kiểu nào thì ghi tên kiểu đó khi đặt lịch.",
+      "grid.bio": "Tóc đẹp từ tâm – nâng tầm nhan sắc ✂︎ Nhà tạo mẫu tóc",
+      "grid.followers": "người theo dõi", "grid.reviews": "đánh giá", "grid.follow": "Theo dõi trên Facebook ↗",
+      "space.eyebrow": "Không gian &amp; cam kết",
+      "space.h2": 'Làm tóc <em class="s">bằng cả tâm.</em>',
+      "space.p": "Tiệm sáng, rộng, nhiều ghế, ngay mặt đường. Đây là những điều tụi mình cam kết với mọi khách.",
+      "space.alt1": "Bên trong {name}", "space.alt2": "Khu ghế làm tóc của tiệm", "space.alt3": "Logo {name}",
+      "book.eyebrow": "Đặt lịch",
+      "book.h2": 'Inbox <em class="s">tụi mình</em> nha.',
+      "book.p": "Điền form này, tụi mình soạn sẵn tin nhắn cho bạn. Gửi qua Messenger hoặc Zalo kèm ảnh mẫu, tiệm sẽ trả lời với khung giờ phù hợp.",
+      "f.service": "Dịch vụ", "f.service.ph": "Chọn dịch vụ…",
+      "f.date": "Ngày mong muốn", "f.when": "Buổi",
+      "when.am": "Sáng", "when.pm": "Chiều", "when.eve": "Tối",
+      "f.name": "Tên của bạn", "f.name.ph": "VD: Linh",
+      "f.phone": "Số điện thoại / Zalo", "f.phone.ph": "09xx xxx xxx",
+      "f.inspo": "Ảnh mẫu (không bắt buộc)", "f.inspo.add": "Thêm ảnh chụp màn hình",
+      "f.inspo.help": "Chạm để chọn, hoặc kéo thả ảnh vào đây. Ảnh chỉ nằm trên máy bạn.",
+      "f.notes": "Có gì tụi mình cần biết không?",
+      "f.notes.ph": "Tóc từng nhuộm hộp 3 tháng trước, tóc dày, muốn kiểu ít phải chăm…",
+      "f.submit": "Soạn tin nhắn →",
+      "err.service": "dịch vụ", "err.name": "tên", "err.and": " và ",
+      "err.msg": "Bạn thêm {x} để tụi mình biết ai đặt và đặt gì nhé.",
+      "dm.eyebrow": "Tin nhắn của bạn", "dm.preview": "Xem trước", "dm.ready": "Sẵn sàng gửi",
+      "dm.empty": "Yêu cầu đặt lịch của bạn sẽ hiện ở đây, sẵn sàng để dán vào Messenger hoặc Zalo.",
+      "dm.copy": "Sao chép tin nhắn", "dm.copied": "Đã chép ✓", "dm.selected": "Đã chọn. Nhấn Ctrl/⌘+C để chép",
+      "dm.call": "Muốn gọi điện? Hotline",
+      "msg.hi": "Chào {name}! Mình muốn đặt lịch 💇", "msg.service": "Dịch vụ",
+      "msg.when": "Thời gian", "msg.name": "Tên", "msg.phone": "SĐT/Zalo", "msg.notes": "Ghi chú", "msg.anyday": "ngày nào trong tuần cũng được",
+      "msg.inspo": "Mình gửi ảnh mẫu ngay sau đây 📸",
+      "visit.eyebrow": "Ghé tiệm", "visit.h2": 'Ghé <em class="s">chơi</em> nha.',
+      "visit.alt": "Mặt tiền {name}",
+      "visit.hotline": "Hotline / Zalo", "visit.hours": "Giờ mở cửa",
+      "visit.dir": "Chỉ đường Google Maps ↗",
+      "visit.score": "khách đề xuất · {reviews} đánh giá trên Facebook",
+      "foot.addr": "Địa chỉ", "foot.map": "Xem bản đồ ↗", "foot.contact": "Liên hệ", "foot.top": "Lên đầu trang ↑",
+      "price.from": "từ", "price.quote": "Báo giá", "tabs.aria": "Nhóm dịch vụ",
+      "load.error": "Không tải được nội dung trang. Hãy mở trang qua máy chủ web (không mở trực tiếp file)."
+    },
+    en: {
+      "nav.menu": "Prices", "nav.grid": "Our work", "nav.space": "The salon", "nav.visit": "Visit",
+      "cta.book": "Book",
+      "hero.sticker": "<b>{recommend}</b>clients<br>recommend",
+      "hero.eyebrow": "{name} · {city}",
+      "hero.h1": 'Beautiful hair, <em class="s">from the heart.</em>',
+      "hero.lede": "<b>Elevating every head of hair.</b> Bring your inspo pic. We'll listen to what you want, quote the price up front, then make it look even better in person.",
+      "hero.cta1": "Book now →", "hero.cta2": "See our work",
+      "proof.reviews": "recommend · {reviews} Facebook reviews", "proof.followers": "Facebook followers", "proof.addr": "{street}, {city}",
+      "post.aria": "Latest post from the salon", "post.sub": "{address}, {city}",
+      "hl.aria": "Browse by look",
+      "ba.eyebrow": "Before &amp; after", "ba.h2": 'See the <em class="s">difference.</em>',
+      "ba.p": "Real clients, photographed right at the chair.",
+      "menu.eyebrow": "Prices",
+      "menu.h2": 'Pick your <em class="s">vibe.</em>',
+      "menu.p": "Open, transparent pricing. Prices below are for short to shoulder-length hair; we quote longer or thicker hair before we start.",
+      "menu.note": "Prices in thousands of VND (K = 1,000₫).",
+      "aside.eyebrow": "Before your visit", "aside.h3": "Read this first",
+      "aside.list": "<li>Book 2–3 days ahead to get the time you want.</li><li>Save 2–3 inspo pics. Include one you <em>don't</em> like as well.</li><li>Tell us if your hair has been bleached, box-dyed, permed or straightened recently.</li><li>Big colour changes (dark → light) may take two sessions to keep your hair healthy.</li>",
+      "grid.eyebrow": "Our work",
+      "grid.h2": 'Fresh off <em class="s">the chair.</em>',
+      "grid.p": "Real clients, real lighting. Like a look? Mention its name when you book.",
+      "grid.bio": "Beautiful hair from the heart ✂︎ Hair stylists",
+      "grid.followers": "followers", "grid.reviews": "reviews", "grid.follow": "Follow on Facebook ↗",
+      "space.eyebrow": "The salon &amp; our promise",
+      "space.h2": 'Hair done <em class="s">with heart.</em>',
+      "space.p": "A bright, spacious salon right on the main street. These are the things we promise every client.",
+      "space.alt1": "Inside {name}", "space.alt2": "The salon's styling stations", "space.alt3": "{name} logo",
+      "book.eyebrow": "Book",
+      "book.h2": 'Message <em class="s">us.</em>',
+      "book.p": "Fill this in and we'll write the message for you. Send it on Messenger or Zalo with your inspo pic, and we'll reply with times that suit you.",
+      "f.service": "Service", "f.service.ph": "Choose a service…",
+      "f.date": "Preferred date", "f.when": "Time of day",
+      "when.am": "Morning", "when.pm": "Afternoon", "when.eve": "Evening",
+      "f.name": "Your name", "f.name.ph": "e.g. Linh",
+      "f.phone": "Phone / Zalo", "f.phone.ph": "09xx xxx xxx",
+      "f.inspo": "Inspo pic (optional)", "f.inspo.add": "Add a screenshot",
+      "f.inspo.help": "Tap to choose, or drop an image here. It stays on your phone.",
+      "f.notes": "Anything we should know?",
+      "f.notes.ph": "Box-dyed 3 months ago, very thick hair, want something low-maintenance…",
+      "f.submit": "Write my message →",
+      "err.service": "a service", "err.name": "your name", "err.and": " and ",
+      "err.msg": "Add {x} so we know who's booking and what for.",
+      "dm.eyebrow": "Your message", "dm.preview": "Preview", "dm.ready": "Ready to send",
+      "dm.empty": "Your booking request will appear here, ready to paste into Messenger or Zalo.",
+      "dm.copy": "Copy message", "dm.copied": "Copied ✓", "dm.selected": "Selected. Press Ctrl/⌘+C to copy",
+      "dm.call": "Prefer to call? Hotline",
+      "msg.hi": "Hi {name}! I'd like to book 💇", "msg.service": "Service",
+      "msg.when": "When", "msg.name": "Name", "msg.phone": "Phone/Zalo", "msg.notes": "Notes", "msg.anyday": "any day that week",
+      "msg.inspo": "Sending my inspo pic next 📸",
+      "visit.eyebrow": "Visit", "visit.h2": 'Come <em class="s">say hi.</em>',
+      "visit.alt": "{name} storefront",
+      "visit.hotline": "Hotline / Zalo", "visit.hours": "Opening hours",
+      "visit.dir": "Directions on Google Maps ↗",
+      "visit.score": "of clients recommend us · {reviews} Facebook reviews",
+      "foot.addr": "Address", "foot.map": "View map ↗", "foot.contact": "Contact", "foot.top": "Back to top ↑",
+      "price.from": "from", "price.quote": "Quote", "tabs.aria": "Service categories",
+      "load.error": "The page content couldn't load. Open the site through a web server, not as a local file."
+    }
+  };
+
+  /* ======= Content (loaded from /content) ======= */
+  let SALON = {}, SERVICES = { categories: [] }, GALLERY = { looks: [], before_after: [], highlights: [] }, EXTRAS = { ticker: [], promises: [], reviews: [], faq: [] };
+
+  /* ======= Helpers ======= */
+  const LANGS = ["vi", "en"];
+  let lang = "vi";
+  const $ = s => document.querySelector(s);
+  const esc = s => String(s ?? "").replace(/[&<>"]/g, ch => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;" }[ch]));
+  // Field in the current language: obj.key_vi / obj.key_en, then obj.key, then obj[lang] (for {vi,en} pairs)
+  const F = (obj, key) => obj?.[`${key}_${lang}`] ?? obj?.[`${key}_vi`] ?? obj?.[key] ?? "";
+  // Salon field, plus a few derived ones
+  const S = key => {
+    const m = String(SALON.address || "").match(/^(\S+)\s+(.*)$/);
+    if (key === "street_no") return m ? m[1] : "";
+    if (key === "street") return m ? m[2] : SALON.address || "";
+    return F(SALON, key);
+  };
+  const fill = str => String(str).replace(/\{(\w+)\}/g, (_, k) => esc(S(k)));
+  const t = k => fill(STR[lang][k] ?? STR.vi[k] ?? k);
+  // CMS stores images as /photos/x.jpg; drop the leading slash so the site also works from a sub-folder
+  const img = p => String(p || "").replace(/^\//, "");
+  const num = n => Number(n).toLocaleString(lang === "vi" ? "vi-VN" : "en-US");
+  const hasPrice = p => p !== null && p !== undefined && p !== "";
+  const price = i => !hasPrice(i.price) ? t("price.quote") : `${i.from ? `<small>${t("price.from")}</small>` : ""}${num(i.price)}K`;
+
+  /* ======= Menu tabs ======= */
+  const tabs = $("#tabs"), svc = $("#svc");
+  let currentTab = "";
+  const cats = () => SERVICES.categories || [];
+  function renderTabs() {
+    if (!cats().some(c => c.id === currentTab)) currentTab = cats()[0]?.id || "";
+    tabs.setAttribute("aria-label", t("tabs.aria"));
+    tabs.innerHTML = cats().map(c =>
+      `<button class="tab" role="tab" id="tab-${esc(c.id)}" data-k="${esc(c.id)}" aria-selected="${c.id === currentTab}" aria-controls="svc">${esc(F(c, "name"))}</button>`).join("");
+  }
+  function showTab(k) {
+    const cat = cats().find(c => c.id === k); if (!cat) return;
+    currentTab = k;
+    tabs.querySelectorAll(".tab").forEach(btn => btn.setAttribute("aria-selected", btn.dataset.k === k));
+    svc.setAttribute("aria-labelledby", "tab-" + k);
+    svc.innerHTML = (cat.items || []).map(i => `
+      <li><h3>${esc(F(i, "name"))}</h3><span class="dur">${esc(F(i, "duration"))}</span><span class="price">${price(i)}</span>
+      ${F(i, "note") ? `<p class="note">${esc(F(i, "note"))}</p>` : ""}</li>`).join("");
+  }
+  tabs.addEventListener("click", e => { const btn = e.target.closest(".tab"); if (btn) showTab(btn.dataset.k); });
+  tabs.addEventListener("keydown", e => {
+    if (!["ArrowRight","ArrowLeft"].includes(e.key)) return;
+    const all = [...tabs.querySelectorAll(".tab")];
+    const i = all.indexOf(document.activeElement);
+    const next = all[(i + (e.key === "ArrowRight" ? 1 : -1) + all.length) % all.length];
+    next.focus(); showTab(next.dataset.k);
+  });
+
+  /* ======= Highlights ======= */
+  $("#hl-row").addEventListener("click", e => {
+    const btn = e.target.closest(".hl"); if (!btn) return;
+    const target = btn.dataset.target || "";
+    if (target.startsWith("#")) { const el = $(target); if (el) el.scrollIntoView(); }
+    else { showTab(target); $("#menu").scrollIntoView(); }
+  });
+
+  /* ======= Booking form ======= */
+  const fService = $("#f-service"), fDate = $("#f-date");
+  try { fDate.min = new Date().toISOString().slice(0, 10); } catch (_) {}
+
+  function renderSelects() {
+    // Options keep the same order in both languages, so the chosen index survives a switch.
+    const si = fService.selectedIndex;
+    fService.innerHTML = `<option value="">${esc(t("f.service.ph"))}</option>` + cats().map(cat =>
+      `<optgroup label="${esc(F(cat, "name"))}">${(cat.items || []).map(i => `<option>${esc(F(i, "name"))}</option>`).join("")}</optgroup>`).join("");
+    if (si > 0) fService.selectedIndex = si;
+  }
+
+  // Inspo upload (local preview only)
+  const fFile = $("#f-file"), thumb = $("#thumb"), drop = $("#drop"), dropLabel = $("#drop-label");
+  let inspoName = "";
+  function setInspo(file) {
+    if (!file || !file.type.startsWith("image/")) return;
+    const r = new FileReader();
+    r.onload = () => { thumb.style.backgroundImage = `url("${r.result}")`; thumb.textContent = ""; };
+    r.readAsDataURL(file);
+    inspoName = file.name.length > 28 ? file.name.slice(0, 25) + "…" : file.name;
+    dropLabel.textContent = inspoName;
+  }
+  fFile.addEventListener("change", () => setInspo(fFile.files[0]));
+  ["dragenter","dragover"].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.add("over"); }));
+  ["dragleave","drop"].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.remove("over"); }));
+  drop.addEventListener("drop", e => setInspo(e.dataTransfer.files[0]));
+
+  const form = $("#book-form"), err = $("#err"), bubble = $("#bubble"), acts = $("#dm-actions");
+  let dmReady = false, errShown = false;
+
+  function validate() {
+    const missing = [];
+    if (!fService.value) missing.push(t("err.service"));
+    if (!$("#f-name").value.trim()) missing.push(t("err.name"));
+    return missing;
+  }
+  function showErr(missing) {
+    err.textContent = (STR[lang]["err.msg"]).replace("{x}", missing.join(t("err.and")));
+    err.hidden = false; errShown = true;
+  }
+  function buildDM() {
+    const name = $("#f-name").value.trim();
+    const phone = $("#f-phone").value.trim();
+    const when = form.querySelector('input[name="when"]:checked').value;
+    let dateTxt = t("msg.anyday");
+    if (fDate.value) {
+      const d = new Date(fDate.value + "T12:00:00");
+      dateTxt = d.toLocaleDateString(lang === "vi" ? "vi-VN" : "en-US", { weekday: "short", day: "numeric", month: "short" });
+    }
+    const notes = $("#f-notes").value.trim();
+    const lines = [
+      t("msg.hi"), "",
+      `${t("msg.service")}: ${fService.value}`,
+      `${t("msg.when")}: ${dateTxt}, ${t("when." + when).toLowerCase()}`,
+      `${t("msg.name")}: ${name}`
+    ];
+    if (phone) lines.push(`${t("msg.phone")}: ${phone}`);
+    if (notes) lines.push(`${t("msg.notes")}: ${notes}`);
+    if (inspoName) lines.push("", t("msg.inspo"));
+    // Decode entities that fill() escaped, since the bubble uses textContent
+    const tmp = document.createElement("textarea"); tmp.innerHTML = lines.join("\n");
+    bubble.textContent = tmp.value;
+    bubble.classList.remove("empty");
+    $("#dm-title").textContent = t("dm.ready");
+    acts.hidden = false;
+    dmReady = true;
+  }
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+    const missing = validate();
+    if (missing.length) {
+      showErr(missing);
+      (!fService.value ? fService : $("#f-name")).focus();
+      return;
+    }
+    err.hidden = true; errShown = false;
+    buildDM();
+  });
+
+  $("#copy").addEventListener("click", async e => {
+    const btn = e.currentTarget;
+    try {
+      await navigator.clipboard.writeText(bubble.textContent);
+      btn.textContent = t("dm.copied");
+    } catch (_) {
+      const sel = getSelection(), rng = document.createRange();
+      rng.selectNodeContents(bubble); sel.removeAllRanges(); sel.addRange(rng);
+      btn.textContent = t("dm.selected");
+    }
+    setTimeout(() => (btn.textContent = t("dm.copy")), 2400);
+  });
+
+  /* ======= Render everything for the current language ======= */
+  function render() {
+    document.documentElement.lang = lang;
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      // Keep the generated message and chosen file name instead of overwriting them with default copy
+      if (el === bubble && dmReady) return;
+      if (el.id === "dm-title" && dmReady) { el.textContent = t("dm.ready"); return; }
+      if (el === dropLabel && inspoName) return;
+      el.innerHTML = t(el.dataset.i18n);
+    });
+    document.querySelectorAll("[data-i18n-ph]").forEach(el => el.placeholder = STR[lang][el.dataset.i18nPh]);
+    document.querySelectorAll("[data-i18n-aria]").forEach(el => el.setAttribute("aria-label", STR[lang][el.dataset.i18nAria]));
+    document.querySelectorAll("[data-i18n-alt]").forEach(el => el.alt = S("name") ? STR[lang][el.dataset.i18nAlt].replace("{name}", S("name")) : "");
+    document.querySelectorAll(".lang button").forEach(btn => btn.setAttribute("aria-pressed", btn.dataset.lang === lang));
+
+    // Salon fields
+    document.querySelectorAll("[data-bind]").forEach(el => el.textContent = S(el.dataset.bind));
+    document.querySelectorAll("[data-bind-href]").forEach(el => el.href = S(el.dataset.bindHref) || "#");
+    document.querySelectorAll("[data-bind-src]").forEach(el => { const v = img(S(el.dataset.bindSrc)); if (v) el.src = v; });
+    const hero = $("#hero-img");
+    if (SALON.hero_image) { hero.src = img(SALON.hero_image); hero.alt = S("hero_caption"); }
+
+    const tick = (EXTRAS.ticker || []).map(x => `<span>${esc(F(x, lang) || x.vi)}</span>`).join("");
+    $("#ticker").innerHTML = tick + tick;
+
+    $("#hl-row").innerHTML = (GALLERY.highlights || []).map(h =>
+      `<button class="hl" type="button" data-target="${esc(h.target)}">
+        <span class="ring"><img src="${esc(img(h.image))}" alt="" loading="lazy" width="84" height="84"></span>${esc(F(h, "label"))}</button>`).join("");
+
+    $("#ba-grid").innerHTML = (GALLERY.before_after || []).map(x => `
+      <figure class="ba-card">
+        <img src="${esc(img(x.image))}" width="600" height="600" loading="lazy" alt="${esc(F(x, "title"))}">
+        <figcaption><b>${esc(F(x, "title"))}</b>${F(x, "desc") ? `<span>${esc(F(x, "desc"))}</span>` : ""}</figcaption>
+      </figure>`).join("");
+
+    renderTabs(); showTab(currentTab);
+
+    $("#feed").innerHTML = (GALLERY.looks || []).map(l => `
+      <figure class="tile">
+        <img src="${esc(img(l.image))}" alt="${esc(F(l, "name"))}" loading="lazy" width="414" height="414">
+        <figcaption><b>${esc(F(l, "name"))}</b><small>${esc(S("name").toUpperCase())}</small></figcaption>
+      </figure>`).join("");
+
+    $("#promises").innerHTML = (EXTRAS.promises || []).map(p =>
+      `<li><b>${esc(F(p, "title"))}</b><span>${esc(F(p, "desc"))}</span></li>`).join("");
+
+    $("#reviews").innerHTML = (EXTRAS.reviews || []).map(r =>
+      `<blockquote class="quote"><p>“${esc(F(r, "quote"))}”</p><cite>${esc(F(r, "by"))}</cite></blockquote>`).join("");
+
+    const open = [...document.querySelectorAll("#faq details")].map(d => d.open);
+    $("#faq").innerHTML = (EXTRAS.faq || []).map((f, i) =>
+      `<details${(open.length ? open[i] : i === 0) ? " open" : ""}><summary>${esc(F(f, "q"))}</summary><p>${esc(F(f, "a"))}</p></details>`).join("");
+
+    renderSelects();
+
+    if (dmReady) buildDM();
+    if (errShown) { const m = validate(); m.length ? showErr(m) : (err.hidden = true); }
+  }
+
+  function setLang(next, force) {
+    if (!LANGS.includes(next) || (next === lang && !force)) return;
+    lang = next;
+    try { localStorage.setItem("longhair-lang", lang); } catch (_) {}
+    render();
+  }
+  document.querySelectorAll(".lang button").forEach(btn => btn.addEventListener("click", () => setLang(btn.dataset.lang)));
+
+  // Start language: ?lang=en or #en in the link, then the saved choice, then Vietnamese.
+  let start = "";
+  try { start = new URLSearchParams(location.search).get("lang") || ""; } catch (_) {}
+  if (!start && LANGS.includes(location.hash.slice(1))) start = location.hash.slice(1);
+  if (!start) { try { start = localStorage.getItem("longhair-lang") || ""; } catch (_) {} }
+  if (!LANGS.includes(start)) start = "vi";
+  lang = start;
+  $("#yr").textContent = new Date().getFullYear();
+
+  /* ======= Load content, then render ======= */
+  const load = f => fetch(`content/${f}.json`, { cache: "no-cache" }).then(r => { if (!r.ok) throw new Error(f); return r.json(); });
+  Promise.all(["salon", "services", "gallery", "extras"].map(load))
+    .then(([a, b, c, d]) => { SALON = a; SERVICES = b; GALLERY = c; EXTRAS = d; })
+    .catch(() => { const el = $("#load-error"); el.textContent = STR[lang]["load.error"]; el.hidden = false; })
+    .finally(() => setLang(lang, true));
+})();
+</script>
+</body>
+</html>

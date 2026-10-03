@@ -1,0 +1,62 @@
+{
+  "categories": [
+    {
+      "id": "cut",
+      "name_vi": "Cắt & gội",
+      "name_en": "Cut & wash",
+      "items": [
+        { "name_vi": "Cắt + gội + sấy tạo kiểu", "name_en": "Cut, wash & style", "duration_vi": "60 phút", "duration_en": "60 min", "price": 150, "from": false,
+          "note_vi": "Tư vấn kiểu hợp khuôn mặt, cắt, gội và sấy vào nếp.", "note_en": "Face-shape consult, cut, wash and blow-dry." },
+        { "name_vi": "Cắt layer / tỉa tầng", "name_en": "Layered cut", "duration_vi": "75 phút", "duration_en": "75 min", "price": 250, "from": false,
+          "note_vi": "Layer dài, layer ôm mặt, tỉa tầng cho tóc bồng tự nhiên.", "note_en": "Long layers or face-framing layers for natural volume." },
+        { "name_vi": "Cắt mái thưa", "name_en": "Curtain bangs", "duration_vi": "15 phút", "duration_en": "15 min", "price": 50, "from": false,
+          "note_vi": "Mái thưa, mái bay, mái Hàn.", "note_en": "Curtain, wispy or Korean-style bangs." },
+        { "name_vi": "Gội dưỡng + sấy", "name_en": "Wash & blow-dry", "duration_vi": "30 phút", "duration_en": "30 min", "price": 80, "from": false,
+          "note_vi": "Gội, massage đầu và sấy tạo kiểu.", "note_en": "Wash, scalp massage and blow-dry." }
+      ]
+    },
+    {
+      "id": "perm",
+      "name_vi": "Uốn · Duỗi",
+      "name_en": "Perm · Straighten",
+      "items": [
+        { "name_vi": "Uốn sóng lơi / uốn cụp", "name_en": "Soft wave or curled-under perm", "duration_vi": "2–3 giờ", "duration_en": "2–3 h", "price": 699, "from": true,
+          "note_vi": "Sóng lơi Hàn Quốc, uốn cụp đuôi, uốn phồng chân tóc.", "note_en": "Korean soft waves, curled-under ends or root volume." },
+        { "name_vi": "Duỗi thẳng tự nhiên", "name_en": "Natural straightening", "duration_vi": "2–3 giờ", "duration_en": "2–3 h", "price": 699, "from": true,
+          "note_vi": "Thẳng mượt, không cứng đơ, có bước bảo vệ tóc.", "note_en": "Smooth, natural-looking straight hair with protective care." },
+        { "name_vi": "Uốn / duỗi + phục hồi", "name_en": "Perm or straighten + treatment", "duration_vi": "3 giờ", "duration_en": "3 h", "price": 899, "from": true,
+          "note_vi": "Kèm phục hồi để tóc giữ độ mềm và bóng.", "note_en": "Includes a repair treatment to keep hair soft and shiny." }
+      ]
+    },
+    {
+      "id": "colour",
+      "name_vi": "Nhuộm",
+      "name_en": "Colour",
+      "items": [
+        { "name_vi": "Nhuộm thời trang", "name_en": "Fashion colour", "duration_vi": "2 giờ", "duration_en": "2 h", "price": 499, "from": true,
+          "note_vi": "Nâu lạnh, nâu ánh rêu, nâu đỏ, tím cà… không cần tẩy.", "note_en": "Cool brown, moss brown, red brown, eggplant… no bleach needed." },
+        { "name_vi": "Nhuộm đỏ / màu nổi", "name_en": "Red & vivid colours", "duration_vi": "2–3 giờ", "duration_en": "2–3 h", "price": 899, "from": true,
+          "note_vi": "Đỏ rượu, đỏ cherry và các màu nổi. Giá tùy lượng tẩy cần làm trước.", "note_en": "Wine, cherry and vivid shades. Price depends on pre-lightening." },
+        { "name_vi": "Highlight / balayage", "name_en": "Highlights / balayage", "duration_vi": "3–4 giờ", "duration_en": "3–4 h", "price": 1200, "from": true,
+          "note_vi": "Highlight sợi, balayage chuyển màu mềm. Đã gồm tẩy và nhuộm phủ.", "note_en": "Fine highlights or soft balayage. Bleach and toner included." },
+        { "name_vi": "Nhuộm phủ bạc", "name_en": "Grey coverage", "duration_vi": "90 phút", "duration_en": "90 min", "price": 350, "from": true,
+          "note_vi": "Phủ bạc chân tóc, màu bền, lên màu tự nhiên.", "note_en": "Root grey coverage with a long-lasting, natural result." },
+        { "name_vi": "Sửa màu", "name_en": "Colour correction", "duration_vi": "Theo tư vấn", "duration_en": "By consult", "price": null, "from": false,
+          "note_vi": "Cứu tóc nhuộm hộp, lệch màu hoặc loang. Tư vấn miễn phí trước.", "note_en": "Box-dye rescue, patchy or uneven colour. Free consult first." }
+      ]
+    },
+    {
+      "id": "care",
+      "name_vi": "Phục hồi",
+      "name_en": "Treatments",
+      "items": [
+        { "name_vi": "Phục hồi tóc hư tổn", "name_en": "Damage repair", "duration_vi": "45 phút", "duration_en": "45 min", "price": 300, "from": true,
+          "note_vi": "Dành cho tóc khô xơ sau tẩy, uốn, duỗi.", "note_en": "For dry, damaged hair after bleach, perms or straightening." },
+        { "name_vi": "Phủ bóng", "name_en": "Gloss", "duration_vi": "45 phút", "duration_en": "45 min", "price": 400, "from": true,
+          "note_vi": "Tóc bóng, giữ màu nhuộm lâu hơn.", "note_en": "Adds shine and helps colour last longer." },
+        { "name_vi": "Hấp dầu / ủ tóc", "name_en": "Deep conditioning", "duration_vi": "30 phút", "duration_en": "30 min", "price": 150, "from": false,
+          "note_vi": "Ủ dưỡng sâu, gội và sấy.", "note_en": "Deep conditioning mask, wash and blow-dry." }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,177 @@
+# Decap CMS – trang quản trị nội dung Long Hair Salon
+# Hướng dẫn cài đặt: xem HUONG-DAN.md ở thư mục gốc.
+
+backend:
+  name: github
+  repo: YOUR-GITHUB-USERNAME/long-hair-salon   # ← đổi thành repo GitHub của bạn
+  branch: main
+  commit_messages:
+    update: "Cập nhật {{collection}} “{{slug}}”"
+    uploadMedia: "Tải ảnh lên “{{path}}”"
+    deleteMedia: "Xóa ảnh “{{path}}”"
+
+# Cho phép sửa thử trên máy tính: chạy `npx decap-server` rồi mở http://localhost:8000/admin/
+local_backend: true
+
+locale: vi
+site_url: https://long-hair-salon.netlify.app        # ← đổi thành địa chỉ web thật
+display_url: https://long-hair-salon.netlify.app
+
+media_folder: photos/uploads
+public_folder: /photos/uploads
+
+collections:
+  # ---------------------------------------------------------------
+  - name: salon
+    label: "Thông tin tiệm"
+    editor: { preview: false }
+    files:
+      - name: salon
+        label: "Thông tin tiệm"
+        file: content/salon.json
+        fields:
+          - { name: name, label: "Tên tiệm", widget: string }
+          - { name: slogan_vi, label: "Slogan (tiếng Việt)", widget: string }
+          - { name: slogan_en, label: "Slogan (tiếng Anh)", widget: string }
+          - { name: address, label: "Địa chỉ (số nhà + đường)", widget: string, hint: "VD: 284 Quang Trung" }
+          - { name: city_vi, label: "Quận, thành phố (tiếng Việt)", widget: string }
+          - { name: city_en, label: "Quận, thành phố (tiếng Anh)", widget: string }
+          - { name: hotline, label: "Hotline", widget: string }
+          - { name: hours_vi, label: "Giờ mở cửa (tiếng Việt)", widget: string, hint: "VD: 8:30 – 21:00 hằng ngày" }
+          - { name: hours_en, label: "Giờ mở cửa (tiếng Anh)", widget: string }
+          - { name: facebook, label: "Link Facebook", widget: string }
+          - { name: messenger, label: "Link Messenger", widget: string, hint: "Dạng https://m.me/…" }
+          - { name: zalo, label: "Link Zalo", widget: string, hint: "Dạng https://zalo.me/số-điện-thoại" }
+          - { name: map, label: "Link Google Maps", widget: string }
+          - { name: recommend, label: "Tỉ lệ khách đề xuất", widget: string, hint: "VD: 100%" }
+          - { name: reviews, label: "Số lượt đánh giá", widget: string }
+          - { name: followers, label: "Số người theo dõi", widget: string, hint: "VD: 3,2K" }
+          - { name: hero_image, label: "Ảnh lớn đầu trang", widget: image, hint: "Ảnh dọc, tỉ lệ 4:5 là đẹp nhất" }
+          - { name: hero_caption_vi, label: "Chú thích ảnh đầu trang (tiếng Việt)", widget: text }
+          - { name: hero_caption_en, label: "Chú thích ảnh đầu trang (tiếng Anh)", widget: text }
+          - { name: space_image_1, label: "Ảnh không gian tiệm – ảnh ngang lớn", widget: image }
+          - { name: space_image_2, label: "Ảnh không gian tiệm – ảnh vuông 1", widget: image }
+          - { name: space_image_3, label: "Ảnh không gian tiệm – ảnh vuông 2", widget: image }
+          - { name: storefront_image, label: "Ảnh mặt tiền", widget: image }
+
+  # ---------------------------------------------------------------
+  - name: services
+    label: "Bảng giá"
+    editor: { preview: false }
+    files:
+      - name: services
+        label: "Bảng giá dịch vụ"
+        file: content/services.json
+        fields:
+          - name: categories
+            label: "Nhóm dịch vụ"
+            label_singular: "nhóm dịch vụ"
+            widget: list
+            summary: "{{fields.name_vi}}"
+            fields:
+              - { name: id, label: "Mã nhóm (viết liền, không dấu)", widget: string, hint: "VD: cut, perm, colour, care. Dùng cho vòng tròn ở đầu trang." , pattern: ['^[a-z0-9-]+$', "Chỉ dùng chữ thường không dấu, số và dấu -"] }
+              - { name: name_vi, label: "Tên nhóm (tiếng Việt)", widget: string }
+              - { name: name_en, label: "Tên nhóm (tiếng Anh)", widget: string }
+              - name: items
+                label: "Dịch vụ"
+                label_singular: "dịch vụ"
+                widget: list
+                summary: "{{fields.name_vi}} · giá {{fields.price}}"
+                fields:
+                  - { name: name_vi, label: "Tên dịch vụ (tiếng Việt)", widget: string }
+                  - { name: name_en, label: "Tên dịch vụ (tiếng Anh)", widget: string }
+                  - { name: price, label: "Giá (nghìn đồng)", widget: number, value_type: int, min: 0, required: false, hint: "VD: 699 = 699.000₫. Để trống nếu muốn hiện “Báo giá”." }
+                  - { name: from, label: "Hiện chữ “từ” trước giá", widget: boolean, default: false, required: false }
+                  - { name: duration_vi, label: "Thời gian (tiếng Việt)", widget: string, required: false, hint: "VD: 60 phút, 2–3 giờ" }
+                  - { name: duration_en, label: "Thời gian (tiếng Anh)", widget: string, required: false }
+                  - { name: note_vi, label: "Mô tả (tiếng Việt)", widget: text, required: false }
+                  - { name: note_en, label: "Mô tả (tiếng Anh)", widget: text, required: false }
+
+  # ---------------------------------------------------------------
+  - name: gallery
+    label: "Ảnh"
+    editor: { preview: false }
+    files:
+      - name: gallery
+        label: "Ảnh tác phẩm, trước/sau, vòng tròn"
+        file: content/gallery.json
+        fields:
+          - name: looks
+            label: "Tác phẩm (lưới ảnh)"
+            label_singular: "ảnh tác phẩm"
+            widget: list
+            summary: "{{fields.name_vi}}"
+            hint: "Nên để số ảnh chia hết cho 3 (6, 9, 12…) cho lưới đều. Kéo thả để đổi thứ tự."
+            fields:
+              - { name: image, label: "Ảnh (vuông là đẹp nhất)", widget: image }
+              - { name: name_vi, label: "Tên kiểu tóc (tiếng Việt)", widget: string }
+              - { name: name_en, label: "Tên kiểu tóc (tiếng Anh)", widget: string }
+          - name: before_after
+            label: "Trước & sau"
+            label_singular: "ảnh trước/sau"
+            widget: list
+            summary: "{{fields.title_vi}}"
+            fields:
+              - { name: image, label: "Ảnh ghép trước/sau (vuông)", widget: image }
+              - { name: title_vi, label: "Tiêu đề (tiếng Việt)", widget: string }
+              - { name: title_en, label: "Tiêu đề (tiếng Anh)", widget: string }
+              - { name: desc_vi, label: "Mô tả (tiếng Việt)", widget: string, required: false }
+              - { name: desc_en, label: "Mô tả (tiếng Anh)", widget: string, required: false }
+          - name: highlights
+            label: "Vòng tròn đầu trang (kiểu story Instagram)"
+            label_singular: "vòng tròn"
+            widget: list
+            summary: "{{fields.label_vi}}"
+            fields:
+              - { name: image, label: "Ảnh", widget: image }
+              - { name: label_vi, label: "Nhãn (tiếng Việt)", widget: string }
+              - { name: label_en, label: "Nhãn (tiếng Anh)", widget: string }
+              - { name: target, label: "Bấm vào thì đi tới", widget: string, hint: "Mã nhóm dịch vụ (cut, perm, colour, care) để mở bảng giá nhóm đó, hoặc #before-after, #grid, #space, #visit" }
+
+  # ---------------------------------------------------------------
+  - name: extras
+    label: "Cam kết, đánh giá, FAQ"
+    editor: { preview: false }
+    files:
+      - name: extras
+        label: "Dòng chữ chạy, cam kết, đánh giá, câu hỏi"
+        file: content/extras.json
+        fields:
+          - name: ticker
+            label: "Dòng chữ chạy (khuyến mãi, thông báo)"
+            label_singular: "dòng chữ"
+            widget: list
+            summary: "{{fields.vi}}"
+            fields:
+              - { name: vi, label: "Tiếng Việt", widget: string }
+              - { name: en, label: "Tiếng Anh", widget: string }
+          - name: promises
+            label: "Cam kết"
+            label_singular: "cam kết"
+            widget: list
+            summary: "{{fields.title_vi}}"
+            fields:
+              - { name: title_vi, label: "Tiêu đề (tiếng Việt)", widget: string }
+              - { name: title_en, label: "Tiêu đề (tiếng Anh)", widget: string }
+              - { name: desc_vi, label: "Mô tả (tiếng Việt)", widget: string }
+              - { name: desc_en, label: "Mô tả (tiếng Anh)", widget: string }
+          - name: reviews
+            label: "Đánh giá của khách"
+            label_singular: "đánh giá"
+            widget: list
+            summary: "{{fields.by_vi}}"
+            fields:
+              - { name: quote_vi, label: "Lời đánh giá (tiếng Việt)", widget: text }
+              - { name: quote_en, label: "Lời đánh giá (tiếng Anh)", widget: text }
+              - { name: by_vi, label: "Người đánh giá (tiếng Việt)", widget: string, hint: "Nên ghi tên viết tắt, VD: Khách hàng T.D. · Facebook" }
+              - { name: by_en, label: "Người đánh giá (tiếng Anh)", widget: string }
+          - name: faq
+            label: "Câu hỏi thường gặp"
+            label_singular: "câu hỏi"
+            widget: list
+            summary: "{{fields.q_vi}}"
+            fields:
+              - { name: q_vi, label: "Câu hỏi (tiếng Việt)", widget: string }
+              - { name: q_en, label: "Câu hỏi (tiếng Anh)", widget: string }
+              - { name: a_vi, label: "Trả lời (tiếng Việt)", widget: text }
+              - { name: a_en, label: "Trả lời (tiếng Anh)", widget: text }

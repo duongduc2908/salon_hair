@@ -1,0 +1,41 @@
+{
+  "ticker": [
+    { "vi": "Tư vấn đúng, chuẩn nhu cầu", "en": "Advice that fits what you want" },
+    { "vi": "Báo giá công khai, minh bạch", "en": "Open, transparent pricing" },
+    { "vi": "Sản phẩm cao cấp", "en": "Premium products only" },
+    { "vi": "Phục vụ tận tâm", "en": "Service from the heart" },
+    { "vi": "Đồng hành cùng bạn mãi mãi", "en": "With you for the long run" }
+  ],
+  "promises": [
+    { "title_vi": "Tư vấn đúng, chuẩn nhu cầu", "title_en": "Advice that fits you",
+      "desc_vi": "Nghe bạn muốn gì, xem chất tóc thật rồi mới đề xuất kiểu và màu hợp.", "desc_en": "We listen, check your real hair, then suggest the cut and colour that suit you." },
+    { "title_vi": "Báo giá công khai, minh bạch", "title_en": "Open, transparent pricing",
+      "desc_vi": "Biết giá trước khi làm. Không phát sinh chi phí bất ngờ.", "desc_en": "You know the price before we start. No surprise charges." },
+    { "title_vi": "Sản phẩm cao cấp", "title_en": "Premium products",
+      "desc_vi": "Thuốc nhuộm, uốn và phục hồi từ các hãng chuyên nghiệp.", "desc_en": "Professional-grade colour, perm and treatment products." },
+    { "title_vi": "Phục vụ tận tâm", "title_en": "Service from the heart",
+      "desc_vi": "Từ lúc gội đến lúc sấy, bạn được chăm như khách quen.", "desc_en": "From the wash to the blow-dry, you're treated like a regular." },
+    { "title_vi": "Đồng hành mãi mãi", "title_en": "With you for the long run",
+      "desc_vi": "Hướng dẫn chăm tóc tại nhà và hỗ trợ sau khi làm.", "desc_en": "Home-care advice and follow-up after your visit." }
+  ],
+  "reviews": [
+    { "quote_vi": "Tuyệt vời, chất lượng tốt nhất Hà Đông.", "quote_en": "Wonderful. The best quality in Ha Dong.",
+      "by_vi": "Khách hàng T.D. · Facebook", "by_en": "Client T.D. · Facebook (translated)" },
+    { "quote_vi": "Great day, great service… Highly recommend to everyone.", "quote_en": "Great day, great service… Highly recommend to everyone.",
+      "by_vi": "Khách nước ngoài M.C. · Facebook", "by_en": "Client M.C. · Facebook" }
+  ],
+  "faq": [
+    { "q_vi": "Làm tóc mất bao lâu?", "q_en": "How long does it take?",
+      "a_vi": "Cắt khoảng 60 phút. Nhuộm thời trang khoảng 2 giờ, uốn hoặc duỗi 2–3 giờ, highlight hoặc balayage 3–4 giờ.",
+      "a_en": "A cut takes about 60 minutes. Fashion colour about 2 hours, perms or straightening 2–3 hours, highlights or balayage 3–4 hours." },
+    { "q_vi": "Giá có phát sinh thêm không?", "q_en": "Will the price change?",
+      "a_vi": "Không. Tiệm báo giá cụ thể sau khi xem tóc và trước khi bắt đầu làm. Bạn đồng ý thì mới làm.",
+      "a_en": "No. We give you an exact price after checking your hair and before we start. We only begin once you agree." },
+    { "q_vi": "Đặt lịch thế nào?", "q_en": "How do I book?",
+      "a_vi": "Nhắn Messenger, Zalo hoặc gọi hotline 033 318 8683. Nên hẹn trước 2–3 ngày, nhất là cuối tuần.",
+      "a_en": "Message us on Messenger or Zalo, or call 033 318 8683. Book 2–3 days ahead, especially for weekends." },
+    { "q_vi": "Tóc hư tổn có làm được không?", "q_en": "Can you work with damaged hair?",
+      "a_vi": "Được. Tiệm sẽ xem tình trạng tóc, có thể đề xuất phục hồi trước rồi mới uốn hoặc nhuộm để tóc khỏe hơn.",
+      "a_en": "Yes. We'll check your hair first and may suggest a repair treatment before perming or colouring." }
+  ]
+}

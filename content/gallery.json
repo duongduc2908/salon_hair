@@ -1,0 +1,29 @@
+{
+  "looks": [
+    { "image": "/photos/look-nau-anh-reu.jpg", "name_vi": "Nâu ánh rêu", "name_en": "Moss brown" },
+    { "image": "/photos/look-do.jpg", "name_vi": "Nhuộm đỏ", "name_en": "Red" },
+    { "image": "/photos/look-bob.jpg", "name_vi": "Tóc bob", "name_en": "Bob" },
+    { "image": "/photos/look-tim-ca.jpg", "name_vi": "Tím cà", "name_en": "Eggplant purple" },
+    { "image": "/photos/look-uon-song.jpg", "name_vi": "Uốn sóng lơi", "name_en": "Soft waves" },
+    { "image": "/photos/look-layer-mai-thua.jpg", "name_vi": "Layer mái thưa", "name_en": "Layers & curtain bangs" },
+    { "image": "/photos/look-nau-lanh.jpg", "name_vi": "Nâu lạnh", "name_en": "Cool brown" },
+    { "image": "/photos/look-highlight.jpg", "name_vi": "Highlight sợi", "name_en": "Fine highlights" },
+    { "image": "/photos/look-nau-do.jpg", "name_vi": "Nâu đỏ", "name_en": "Red brown" }
+  ],
+  "before_after": [
+    { "image": "/photos/before-after-1.jpg", "title_vi": "Cắt layer, tạo phồng", "title_en": "Layered cut with volume",
+      "desc_vi": "Tóc dài thẳng, mỏng → layer có độ bồng, ôm mặt.", "desc_en": "Long, flat, straight hair → face-framing layers with body." },
+    { "image": "/photos/before-after-2.jpg", "title_vi": "Bob uốn cụp", "title_en": "Curled-under bob",
+      "desc_vi": "Bob thẳng xẹp → bob uốn cụp, phồng chân tóc.", "desc_en": "Flat straight bob → bouncy curled-under bob with root lift." }
+  ],
+  "highlights": [
+    { "image": "/photos/look-nau-anh-reu.jpg", "label_vi": "Nhuộm", "label_en": "Colour", "target": "colour" },
+    { "image": "/photos/look-do.jpg", "label_vi": "Màu đỏ", "label_en": "Reds", "target": "colour" },
+    { "image": "/photos/look-layer-mai-thua.jpg", "label_vi": "Layer", "label_en": "Layers", "target": "cut" },
+    { "image": "/photos/look-bob.jpg", "label_vi": "Bob", "label_en": "Bob", "target": "cut" },
+    { "image": "/photos/look-uon-song.jpg", "label_vi": "Uốn", "label_en": "Perms", "target": "perm" },
+    { "image": "/photos/look-highlight.jpg", "label_vi": "Highlight", "label_en": "Highlights", "target": "colour" },
+    { "image": "/photos/before-after-1.jpg", "label_vi": "Trước/Sau", "label_en": "Before/After", "target": "#before-after" },
+    { "image": "/photos/salon-inside-2.jpg", "label_vi": "Tiệm", "label_en": "Salon", "target": "#space" }
+  ]
+}
