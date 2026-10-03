@@ -29,7 +29,7 @@ Cần 2 tài khoản miễn phí: **GitHub** (lưu code) và **Netlify** (chạy
    (Nếu dùng dòng lệnh: `git init`, `git add .`, `git commit -m "Website Long Hair Salon"`, rồi `git remote add origin …` và `git push -u origin main`.)
 
 ### Bước 2. Cấu hình repo cho trang quản trị (đã làm sẵn)
-Tên repo và địa chỉ web nằm ở 2 chỗ, đã điền sẵn `duongduc2908/salon_hair` và `https://profound-unicorn-9725a5.netlify.app`:
+Tên repo và địa chỉ web nằm ở 2 chỗ, đã điền sẵn `duongduc2908/salon_hair` và `https://longhairsalon.netlify.app`:
 - `admin/index.html`, phần `CONFIG` ở đầu đoạn script (portal chính)
 - `admin/decap/config.yml` (trang dự phòng)
 
@@ -58,7 +58,7 @@ Mở `https://ten-web-cua-ban.netlify.app/admin/` → **Đăng nhập bằng Git
 
 ## Dùng trang quản trị hằng ngày
 
-Địa chỉ: **https://profound-unicorn-9725a5.netlify.app/admin/** → **Đăng nhập bằng GitHub**.
+Địa chỉ: **https://longhairsalon.netlify.app/admin/** → **Đăng nhập bằng GitHub**.
 
 | Mục | Làm được gì |
 |---|---|

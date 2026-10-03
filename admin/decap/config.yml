@@ -14,8 +14,8 @@ backend:
 local_backend: true
 
 locale: vi
-site_url: https://profound-unicorn-9725a5.netlify.app
-display_url: https://profound-unicorn-9725a5.netlify.app
+site_url: https://longhairsalon.netlify.app
+display_url: https://longhairsalon.netlify.app
 
 media_folder: photos/uploads
 public_folder: /photos/uploads
