@@ -1,13 +1,861 @@
 <!doctype html>
 <html lang="vi">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex, nofollow">
-  <title>Quản trị · Long Hair Salon</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Quản trị · Long Hair Salon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,700..800&display=swap">
+<style>
+:root{
+  --bg:#F3F4F7; --panel:#FFFFFF; --panel-2:#F8F9FB; --ink:#16131C; --muted:#6B6878; --line:#E3E4EA; --line-2:#D3D5DD;
+  --accent:#E0234E; --accent-ink:#FFFFFF; --accent-soft:#FDE8EE;
+  --side:#16131C; --side-ink:#ECEAF0; --side-muted:#9A96A6; --side-hover:#25212D;
+  --ok:#1E8E5A; --ok-soft:#E3F5EC; --warn:#A86A00; --warn-soft:#FFF4DC; --err:#C62828; --err-soft:#FDECEC;
+  --f-body:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-display:"Bricolage Grotesque","Be Vietnam Pro",system-ui,sans-serif;
+  --r:14px; --shadow:0 1px 2px rgba(22,19,28,.06),0 4px 16px -8px rgba(22,19,28,.12);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 14px/1.5 var(--f-body);-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:inherit}
+img{max-width:100%;display:block}
+[hidden]{display:none!important}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+svg.i{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.brand{font:800 22px/1 var(--f-display);letter-spacing:-.04em}
+.brand span{color:var(--accent)}
+
+/* ---------- Buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:38px;padding:0 16px;border-radius:10px;border:1px solid var(--line-2);background:var(--panel);font-weight:600;cursor:pointer;text-decoration:none;white-space:nowrap;transition:background .15s,border-color .15s}
+.btn:hover{background:var(--panel-2);border-color:#C4C6D0}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.primary:hover{background:#C81D43}
+.btn.primary:disabled{background:#E9B3C1;border-color:#E9B3C1;cursor:not-allowed}
+.btn.dark{background:var(--ink);border-color:var(--ink);color:#fff}
+.btn.ghost{background:transparent;border-color:transparent}
+.btn.ghost:hover{background:var(--panel-2)}
+.btn.sm{height:32px;padding:0 12px;font-size:13px;border-radius:8px}
+.btn.lg{height:46px;padding:0 22px;font-size:15px}
+.icon-btn{display:inline-grid;place-items:center;width:32px;height:32px;border-radius:8px;border:0;background:transparent;color:var(--muted);cursor:pointer}
+.icon-btn:hover{background:var(--panel-2);color:var(--ink)}
+.icon-btn.danger:hover{background:var(--err-soft);color:var(--err)}
+.icon-btn:disabled{opacity:.3;cursor:default;background:transparent}
+
+/* ---------- Login ---------- */
+.login{min-height:100vh;display:grid;place-items:center;padding:24px;background:
+  radial-gradient(1200px 600px at 10% -10%,#FDE8EE 0,transparent 60%),
+  radial-gradient(900px 500px at 110% 110%,#FFF4C2 0,transparent 55%),var(--bg)}
+.login-card{width:100%;max-width:420px;background:var(--panel);border-radius:20px;box-shadow:0 30px 60px -30px rgba(22,19,28,.35);padding:36px 32px;display:grid;gap:22px}
+.login-card .brand{font-size:30px}
+.login-card h1{margin:0;font:700 20px/1.3 var(--f-body)}
+.login-card p{margin:0;color:var(--muted)}
+.login-card .btn{width:100%}
+.login-foot{font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.alert{padding:12px 14px;border-radius:10px;font-size:13px;line-height:1.5}
+.alert.err{background:var(--err-soft);color:var(--err)}
+.alert.warn{background:var(--warn-soft);color:var(--warn)}
+.alert.info{background:var(--panel-2);color:var(--muted)}
+
+/* ---------- Shell ---------- */
+.app{display:grid;grid-template-columns:248px 1fr;min-height:100%}
+.side{background:var(--side);color:var(--side-ink);display:flex;flex-direction:column;position:sticky;top:0;height:100vh;padding:22px 14px 14px}
+.side .brand{color:#fff;padding:0 10px}
+.side .sub{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--side-muted);padding:6px 10px 0}
+.side nav{display:grid;gap:2px;margin-top:28px}
+.nav-item{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;border:0;background:transparent;color:var(--side-ink);cursor:pointer;text-align:left;font-weight:500;position:relative}
+.nav-item:hover{background:var(--side-hover)}
+.nav-item[aria-current="page"]{background:#fff;color:var(--ink);font-weight:600}
+.nav-item[aria-current="page"] svg{color:var(--accent)}
+.nav-item .dot{margin-left:auto;width:8px;height:8px;border-radius:50%;background:#F6C343}
+.side-foot{margin-top:auto;display:grid;gap:10px}
+.side-link{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;color:var(--side-muted);text-decoration:none;font-size:13px}
+.side-link:hover{background:var(--side-hover);color:#fff}
+.user{display:flex;align-items:center;gap:10px;padding:12px;border-radius:12px;background:var(--side-hover)}
+.user img,.user .ph{width:34px;height:34px;border-radius:50%;flex:none;background:#3A3546;display:grid;place-items:center;font-weight:700;color:#fff}
+.user b{display:block;font-size:13px;line-height:1.2;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.user small{display:block;font-size:11px;color:var(--side-muted)}
+.user .icon-btn{margin-left:auto;color:var(--side-muted)}
+.user .icon-btn:hover{background:#3A3546;color:#fff}
+.user>div{min-width:0}
+
+.main{min-width:0;display:flex;flex-direction:column}
+.topbar{position:sticky;top:0;z-index:20;background:rgba(243,244,247,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.topbar .in{max-width:1080px;margin:0 auto;padding:16px 32px;display:flex;align-items:center;gap:16px}
+.topbar h1{margin:0;font:700 20px/1.2 var(--f-body);letter-spacing:-.01em}
+.topbar p{margin:2px 0 0;color:var(--muted);font-size:13px}
+.topbar .actions{margin-left:auto;display:flex;align-items:center;gap:8px}
+.badge{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:999px;font-size:12px;font-weight:600}
+.badge.warn{background:var(--warn-soft);color:var(--warn)}
+.badge.ok{background:var(--ok-soft);color:var(--ok)}
+.badge::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.content{max-width:1080px;width:100%;margin:0 auto;padding:28px 32px 80px;display:grid;gap:20px}
+
+/* ---------- Panels ---------- */
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow)}
+.panel-h{display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line)}
+.panel-h h2{margin:0;font:700 15px/1.3 var(--f-body)}
+.panel-h p{margin:2px 0 0;font-size:12.5px;color:var(--muted)}
+.panel-h .right{margin-left:auto;display:flex;gap:6px;align-items:center}
+.panel-b{padding:20px;display:grid;gap:16px}
+.panel-f{padding:12px 20px;border-top:1px solid var(--line);background:var(--panel-2);border-radius:0 0 var(--r) var(--r)}
+
+/* ---------- Fields ---------- */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px 16px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px 16px}
+.fld{display:grid;gap:6px;min-width:0}
+.lbl{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:#3D3A47}
+.lang{font-style:normal;font-size:10px;font-weight:700;letter-spacing:.06em;padding:1px 6px;border-radius:5px;background:var(--panel-2);border:1px solid var(--line);color:var(--muted)}
+.fld input[type=text],.fld input[type=number],.fld input[type=url],.fld select,.fld textarea,.inline-input{width:100%;height:38px;padding:0 12px;border:1px solid var(--line-2);border-radius:9px;background:#fff;transition:border-color .15s,box-shadow .15s}
+.fld textarea{height:auto;min-height:76px;padding:9px 12px;resize:vertical;line-height:1.5}
+.fld input:focus,.fld select:focus,.fld textarea:focus,.inline-input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.fld small{font-size:12px;color:var(--muted)}
+.check{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;cursor:pointer;user-select:none}
+.check input{width:16px;height:16px;accent-color:var(--accent)}
+
+/* ---------- Dashboard ---------- */
+.hello{display:flex;flex-wrap:wrap;align-items:center;gap:16px;padding:22px 24px;border-radius:var(--r);background:var(--ink);color:#fff;position:relative;overflow:hidden}
+.hello h2{margin:0;font:800 26px/1.15 var(--f-display);letter-spacing:-.03em}
+.hello p{margin:6px 0 0;color:#BDB8C8}
+.hello .btn{margin-left:auto;background:#fff;border-color:#fff;color:var(--ink)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.stat{padding:16px 18px;display:grid;gap:4px;text-align:left;cursor:pointer;border:1px solid var(--line);background:var(--panel);border-radius:var(--r);box-shadow:var(--shadow);transition:border-color .15s,transform .15s}
+.stat:hover{border-color:var(--line-2);transform:translateY(-1px)}
+.stat b{font:800 30px/1 var(--f-display);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.stat span{color:var(--muted);font-size:13px}
+.quick{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.quick button{display:flex;align-items:center;gap:12px;padding:14px;border-radius:12px;border:1px solid var(--line);background:var(--panel-2);cursor:pointer;text-align:left}
+.quick button:hover{border-color:var(--line-2);background:#fff}
+.quick .ic{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);flex:none}
+.quick b{display:block;font-size:13.5px}
+.quick small{color:var(--muted);font-size:12px}
+.dash-cols{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:start}
+.timeline{list-style:none;margin:0;padding:0}
+.timeline li{display:flex;gap:12px;padding:12px 20px;border-bottom:1px solid var(--line)}
+.timeline li:last-child{border-bottom:0}
+.timeline img{width:28px;height:28px;border-radius:50%;flex:none}
+.timeline b{display:block;font-weight:600;font-size:13px}
+.timeline small{color:var(--muted);font-size:12px}
+.empty{padding:20px;color:var(--muted);font-size:13px}
+
+/* ---------- Services ---------- */
+.cat-head{display:grid;grid-template-columns:1fr 1fr 160px auto;gap:12px;align-items:end;padding:16px 20px;border-bottom:1px solid var(--line);background:var(--panel-2);border-radius:var(--r) var(--r) 0 0}
+.svc-row{border-bottom:1px solid var(--line)}
+.svc-row:last-child{border-bottom:0}
+.svc-sum{display:grid;grid-template-columns:28px 1fr 150px auto auto;gap:12px;align-items:center;padding:10px 12px 10px 20px}
+.svc-sum .n{color:var(--muted);font-size:12px;font-variant-numeric:tabular-nums}
+.svc-sum .name{min-width:0}
+.svc-sum .name b{display:block;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.svc-sum .name small{color:var(--muted);font-size:12px}
+.price-in{position:relative}
+.price-in input{padding-right:30px;text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+.price-in::after{content:"K";position:absolute;right:11px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:12px;font-weight:600}
+.row-acts{display:flex;gap:2px}
+.svc-edit{padding:4px 20px 18px 60px;display:grid;gap:14px;background:var(--panel-2);border-top:1px dashed var(--line)}
+.svc-edit .grid2{padding-top:14px}
+.svc-row.open .svc-sum{background:var(--panel-2)}
+.svc-row.open .tog{background:var(--accent-soft);color:var(--accent)}
+
+/* ---------- Gallery ---------- */
+.tabs{display:flex;gap:4px;padding:4px;background:#E7E8EE;border-radius:12px;width:max-content;max-width:100%;overflow-x:auto}
+.tabs button{border:0;background:transparent;padding:8px 14px;border-radius:9px;font-weight:600;color:var(--muted);cursor:pointer;white-space:nowrap}
+.tabs button[aria-selected="true"]{background:#fff;color:var(--ink);box-shadow:var(--shadow)}
+.tabs .cnt{margin-left:6px;font-size:11px;padding:1px 7px;border-radius:999px;background:var(--panel-2);color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow)}
+.card .thumb{position:relative;aspect-ratio:1;background:#EDEEF2 center/cover no-repeat;display:grid;place-items:center;color:var(--muted)}
+.card .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.card .thumb .pick{position:absolute;right:10px;bottom:10px}
+.card .thumb .idx{position:absolute;left:10px;top:10px;background:rgba(22,19,28,.7);color:#fff;font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px}
+.card .body{padding:14px;display:grid;gap:10px}
+.card .foot{margin-top:auto;display:flex;align-items:center;padding:6px 8px;border-top:1px solid var(--line);background:var(--panel-2)}
+.card .foot .sp{flex:1}
+.add-card{border:2px dashed var(--line-2);border-radius:var(--r);background:transparent;display:grid;place-items:center;gap:6px;min-height:260px;color:var(--muted);font-weight:600;cursor:pointer;text-align:center;padding:20px}
+.add-card:hover{border-color:var(--accent);color:var(--accent);background:#fff}
+.add-card svg{width:28px;height:28px}
+.uploading{position:absolute;inset:0;background:rgba(255,255,255,.75);display:grid;place-items:center;font-weight:600;font-size:13px}
+.hint-line{color:var(--muted);font-size:13px}
+
+/* ---------- Image field ---------- */
+.imgfld{display:flex;gap:14px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+.imgfld .ph{width:84px;height:84px;border-radius:10px;flex:none;background:#E7E8EE center/cover no-repeat}
+.imgfld b{display:block;font-size:13px}
+.imgfld small{display:block;color:var(--muted);font-size:12px;margin:2px 0 8px}
+
+/* ---------- List items (extras) ---------- */
+.item{border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+.item-h{display:flex;align-items:center;gap:8px;padding:8px 8px 8px 14px;border-bottom:1px solid var(--line)}
+.item-h b{font-size:12px;color:var(--muted);font-weight:600}
+.item-h .row-acts{margin-left:auto}
+.item-b{padding:14px;display:grid;gap:12px}
+.add-row{display:flex;align-items:center;justify-content:center;gap:8px;height:42px;border:1.5px dashed var(--line-2);border-radius:12px;background:transparent;color:var(--muted);font-weight:600;cursor:pointer;width:100%}
+.add-row:hover{border-color:var(--accent);color:var(--accent);background:#fff}
+
+/* ---------- Toast / loading ---------- */
+.toasts{position:fixed;right:20px;bottom:20px;z-index:100;display:grid;gap:8px;max-width:min(380px,calc(100vw - 40px))}
+.toast{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border-radius:12px;background:var(--ink);color:#fff;box-shadow:0 20px 40px -20px rgba(0,0,0,.5);font-size:13px;animation:tin .2s ease}
+.toast.ok svg{color:#6EE7A8}.toast.err{background:var(--err)}
+@keyframes tin{from{transform:translateY(8px);opacity:0}}
+.loading{min-height:100vh;display:grid;place-items:center;color:var(--muted);gap:12px;align-content:center}
+.spin{width:28px;height:28px;border-radius:50%;border:3px solid var(--line-2);border-top-color:var(--accent);animation:sp 0.8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+/* ---------- Responsive ---------- */
+@media (max-width:980px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .dash-cols{grid-template-columns:1fr}
+  .cat-head{grid-template-columns:1fr 1fr}
+}
+@media (max-width:820px){
+  .app{grid-template-columns:1fr}
+  .side{position:sticky;top:0;z-index:30;height:auto;flex-direction:row;align-items:center;gap:8px;padding:10px 12px;overflow-x:auto}
+  .side .sub,.side-foot .side-link,.user>div,.side .brand{display:none}
+  .side nav{margin:0;display:flex;gap:4px}
+  .nav-item{padding:8px 10px;white-space:nowrap;font-size:13px}
+  .side-foot{margin:0 0 0 auto;flex-direction:row;display:flex}
+  .user{padding:4px;background:transparent}
+  .topbar{top:56px}
+  .topbar .in{padding:12px 16px;flex-wrap:wrap}
+  .content{padding:20px 16px 80px}
+  .grid2,.grid3{grid-template-columns:1fr}
+  .svc-sum{grid-template-columns:1fr 120px auto;padding-left:14px}
+  .svc-sum .n{display:none}
+  .svc-sum .row-acts{grid-column:1/-1;justify-content:flex-end}
+  .svc-edit{padding:4px 14px 16px}
+  .quick{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
 </head>
 <body>
-  <!-- Decap CMS reads ./config.yml and edits the files in /content and /photos -->
-  <script src="https://unpkg.com/decap-cms@3.16.3/dist/decap-cms.js"></script>
+<div id="root"><div class="loading"><div class="spin"></div></div></div>
+<div class="toasts" id="toasts" aria-live="polite"></div>
+<input type="file" id="img-input" accept="image/*" hidden>
+
+<script>
+(() => {
+  /* =========================================================
+     Settings
+     ========================================================= */
+  const CONFIG = {
+    repo: "duongduc2908/salon_hair",
+    branch: "main",
+    site: "https://profound-unicorn-9725a5.netlify.app",
+    siteId: "profound-unicorn-9725a5.netlify.app",   // Netlify site used for GitHub login
+    localApi: "http://localhost:8081/api/v1"        // `npx decap-server` when working on this computer
+  };
+  const FILES = {
+    salon: { path: "content/salon.json", label: "thông tin tiệm" },
+    services: { path: "content/services.json", label: "bảng giá" },
+    gallery: { path: "content/gallery.json", label: "ảnh" },
+    extras: { path: "content/extras.json", label: "cam kết, đánh giá, FAQ" }
+  };
+  const isLocal = ["localhost", "127.0.0.1"].includes(location.hostname);
+  const TOKEN_KEY = "lh-admin-token";
+
+  /* =========================================================
+     Small helpers
+     ========================================================= */
+  const $ = s => document.querySelector(s);
+  const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+  const P = (...parts) => parts.filter(x => x !== "" && x !== undefined && x !== null).join(".");
+  const getPath = (o, p) => p === "" ? o : p.split(".").reduce((a, k) => a == null ? a : a[k], o);
+  const setPath = (o, p, v) => { const ks = p.split("."); const last = ks.pop(); const t = ks.reduce((a, k) => a[k], o); t[last] = v; };
+  const store = { get: k => { try { return localStorage.getItem(k); } catch (_) { return null; } },
+                  set: (k, v) => { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch (_) {} } };
+  const b64enc = str => { const bytes = new TextEncoder().encode(str); let bin = ""; bytes.forEach(b => bin += String.fromCharCode(b)); return btoa(bin); };
+  const b64dec = b64 => new TextDecoder().decode(Uint8Array.from(atob(b64.replace(/\s/g, "")), c => c.charCodeAt(0)));
+  const fmtPrice = p => (p === null || p === undefined || p === "") ? "Báo giá" : Number(p).toLocaleString("vi-VN") + "K";
+  const slug = s => String(s).normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/đ/gi, "d").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 40) || "anh";
+  const ago = iso => {
+    const s = (new Date(iso) - Date.now()) / 1000, rtf = new Intl.RelativeTimeFormat("vi", { numeric: "auto" });
+    for (const [u, n] of [["year", 31536000], ["month", 2592000], ["day", 86400], ["hour", 3600], ["minute", 60]]) if (Math.abs(s) >= n) return rtf.format(Math.round(s / n), u);
+    return "vừa xong";
+  };
+
+  const ICON = {
+    home: '<path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',
+    tag: '<path d="M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/>',
+    image: '<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/>',
+    store: '<path d="M3 9l1.5-5h15L21 9M3 9v11h18V9M3 9h18M9 20v-6h6v6"/>',
+    chat: '<path d="M21 12a8 8 0 0 1-11.6 7.1L3 21l1.9-6.4A8 8 0 1 1 21 12z"/>',
+    ext: '<path d="M14 3h7v7M21 3l-9 9M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/>',
+    up: '<path d="M18 15l-6-6-6 6"/>', down: '<path d="M6 9l6 6 6-6"/>',
+    left: '<path d="M15 18l-6-6 6-6"/>', right: '<path d="M9 18l6-6-6-6"/>',
+    trash: '<path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14M10 11v6M14 11v6"/>',
+    plus: '<path d="M12 5v14M5 12h14"/>', check: '<path d="M20 6L9 17l-5-5"/>',
+    logout: '<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/>',
+    clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+    star: '<path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/>',
+    undo: '<path d="M9 14L4 9l5-5"/><path d="M4 9h11a5 5 0 0 1 0 10h-3"/>',
+    upload: '<path d="M12 16V4M7 9l5-5 5 5M4 20h16"/>',
+    pencil: '<path d="M4 20h4L19 9l-4-4L4 16v4zM14 6l4 4"/>'
+  };
+  const ic = n => `<svg class="i" viewBox="0 0 24 24" aria-hidden="true">${ICON[n]}</svg>`;
+  const GH_MARK = '<svg viewBox="0 0 16 16" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>';
+
+  function toast(msg, kind = "ok") {
+    const el = document.createElement("div");
+    el.className = "toast " + kind;
+    el.innerHTML = (kind === "ok" ? ic("check") : "") + `<span>${esc(msg)}</span>`;
+    $("#toasts").appendChild(el);
+    setTimeout(() => el.remove(), kind === "err" ? 7000 : 3500);
+  }
+
+  /* =========================================================
+     Backends: GitHub (live site) and decap-server (this computer)
+     ========================================================= */
+  const GitHub = {
+    token: null,
+    async api(path, opts = {}) {
+      const r = await fetch("https://api.github.com" + path, {
+        ...opts,
+        headers: { Authorization: `token ${this.token}`, Accept: "application/vnd.github+json", ...(opts.body ? { "Content-Type": "application/json" } : {}) }
+      });
+      if (!r.ok) { const e = new Error(`GitHub ${r.status}`); e.status = r.status; throw e; }
+      return r.status === 204 ? null : r.json();
+    },
+    async user() {
+      const u = await this.api("/user");
+      const repo = await this.api(`/repos/${CONFIG.repo}`);
+      if (!repo.permissions?.push) { const e = new Error("no-push"); e.login = u.login; throw e; }
+      return { login: u.login, name: u.name || u.login, avatar: u.avatar_url };
+    },
+    async read(path) {
+      const d = await this.api(`/repos/${CONFIG.repo}/contents/${path}?ref=${CONFIG.branch}&t=${Date.now()}`);
+      return { text: b64dec(d.content), sha: d.sha };
+    },
+    async write(path, text, sha, message) {
+      const d = await this.api(`/repos/${CONFIG.repo}/contents/${path}`, { method: "PUT", body: JSON.stringify({ message, content: b64enc(text), sha, branch: CONFIG.branch }) });
+      return d.content.sha;
+    },
+    async upload(path, base64, message) {
+      await this.api(`/repos/${CONFIG.repo}/contents/${path}`, { method: "PUT", body: JSON.stringify({ message, content: base64, branch: CONFIG.branch }) });
+    },
+    async history() {
+      return this.api(`/repos/${CONFIG.repo}/commits?sha=${CONFIG.branch}&path=content&per_page=6`);
+    }
+  };
+
+  const Local = {
+    async call(action, params = {}) {
+      const r = await fetch(CONFIG.localApi, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ action, params: { branch: CONFIG.branch, ...params } }) });
+      const d = await r.json();
+      if (!r.ok || d.error) throw new Error(d.error || `local ${r.status}`);
+      return d;
+    },
+    async user() { await this.call("info"); return { login: "may-tinh", name: "Chế độ máy tính", avatar: "" }; },
+    async read(path) { const d = await this.call("getEntry", { path }); return { text: d.data, sha: null }; },
+    async write(path, text, sha, message) {
+      await this.call("persistEntry", { dataFiles: [{ slug: path, path, raw: text }], assets: [], options: { commitMessage: message, useWorkflow: false, status: "draft" } });
+      return null;
+    },
+    async upload(path, base64, message) { await this.call("persistMedia", { asset: { path, content: base64, encoding: "base64" }, options: { commitMessage: message } }); },
+    async history() { return null; }
+  };
+
+  let backend = null, me = null;
+
+  function githubLogin() {
+    return new Promise((resolve, reject) => {
+      const w = window.open(`https://api.netlify.com/auth?provider=github&site_id=${encodeURIComponent(CONFIG.siteId)}&scope=repo`, "lh-auth", "width=960,height=680");
+      if (!w) return reject(new Error("popup"));
+      let done = false;
+      const onMsg = e => {
+        if (e.origin !== "https://api.netlify.com") return;
+        const s = String(e.data);
+        if (s === "authorizing:github") { w.postMessage(e.data, e.origin); return; }
+        if (s.startsWith("authorization:github:success:")) {
+          done = true; window.removeEventListener("message", onMsg);
+          try { resolve(JSON.parse(s.slice("authorization:github:success:".length)).token); } catch (err) { reject(err); }
+        } else if (s.startsWith("authorization:github:error:")) {
+          done = true; window.removeEventListener("message", onMsg); reject(new Error("auth"));
+        }
+      };
+      window.addEventListener("message", onMsg);
+      const timer = setInterval(() => {
+        if (!w.closed) return;
+        clearInterval(timer);
+        setTimeout(() => { if (!done) { window.removeEventListener("message", onMsg); reject(new Error("closed")); } }, 600);
+      }, 500);
+    });
+  }
+
+  /* =========================================================
+     Content state
+     ========================================================= */
+  const M = {}, ORIG = {}, SHA = {}, PREVIEW = {};
+  const isDirty = f => JSON.stringify(M[f]) !== ORIG[f];
+  const dirtyFiles = () => Object.keys(FILES).filter(isDirty);
+  const imgSrc = p => PREVIEW[p] || (p ? p : "");
+
+  async function loadAll() {
+    await Promise.all(Object.entries(FILES).map(async ([f, { path }]) => {
+      const { text, sha } = await backend.read(path);
+      M[f] = JSON.parse(text); ORIG[f] = JSON.stringify(M[f]); SHA[f] = sha;
+    }));
+  }
+
+  /* =========================================================
+     UI state + shell
+     ========================================================= */
+  const VIEWS = {
+    dashboard: { title: "Tổng quan", sub: "Tình trạng website và lối tắt", icon: "home" },
+    services: { title: "Bảng giá", sub: "Nhóm dịch vụ, giá và thời gian làm", icon: "tag", file: "services" },
+    gallery: { title: "Ảnh", sub: "Tác phẩm, trước & sau, vòng tròn đầu trang", icon: "image", file: "gallery" },
+    salon: { title: "Thông tin tiệm", sub: "Địa chỉ, liên hệ, giờ mở cửa, ảnh chính", icon: "store", file: "salon" },
+    extras: { title: "Cam kết & đánh giá", sub: "Dòng chữ chạy, cam kết, đánh giá, câu hỏi thường gặp", icon: "chat", file: "extras" }
+  };
+  const ui = { view: "dashboard", gtab: "looks", open: new Set() };
+  try { const v = location.hash.slice(1); if (VIEWS[v]) ui.view = v; } catch (_) {}
+
+  function renderShell() {
+    const u = me || {};
+    $("#root").innerHTML = `
+      <div class="app">
+        <aside class="side">
+          <div class="brand">long hair<span>.</span></div>
+          <div class="sub">Quản trị website</div>
+          <nav aria-label="Mục quản trị">
+            ${Object.entries(VIEWS).map(([k, v]) => `
+              <button class="nav-item" data-act="go" data-v="${k}" ${ui.view === k ? 'aria-current="page"' : ""}>
+                ${ic(v.icon)}<span>${v.title}</span>${v.file ? `<i class="dot" data-dot="${v.file}" ${isDirty(v.file) ? "" : "hidden"}></i>` : ""}
+              </button>`).join("")}
+          </nav>
+          <div class="side-foot">
+            <a class="side-link" href="${isLocal ? "/" : CONFIG.site}" target="_blank" rel="noopener">${ic("ext")}Xem website</a>
+            <div class="user">
+              ${u.avatar ? `<img src="${esc(u.avatar)}" alt="">` : `<span class="ph">${esc((u.name || "?")[0])}</span>`}
+              <div><b>${esc(u.name)}</b><small>${isLocal ? "Lưu vào máy tính" : "@" + esc(u.login)}</small></div>
+              <button class="icon-btn" data-act="logout" title="Đăng xuất" aria-label="Đăng xuất">${ic("logout")}</button>
+            </div>
+          </div>
+        </aside>
+        <div class="main">
+          <header class="topbar"><div class="in">
+            <div><h1 id="v-title"></h1><p id="v-sub"></p></div>
+            <div class="actions">
+              <span class="badge warn" id="dirty-badge" hidden>Có thay đổi chưa lưu</span>
+              <span class="badge ok" id="saved-badge" hidden>Đã lưu</span>
+              <button class="btn ghost sm" data-act="discard" id="discard-btn" hidden>${ic("undo")}Hoàn tác</button>
+              <button class="btn primary" data-act="save" id="save-btn" disabled>${ic("check")}Lưu &amp; công bố</button>
+            </div>
+          </div></header>
+          <main class="content" id="view"></main>
+        </div>
+      </div>`;
+    renderView();
+  }
+
+  function renderView() {
+    const v = VIEWS[ui.view];
+    document.querySelectorAll(".nav-item").forEach(b => b.dataset.v === ui.view ? b.setAttribute("aria-current", "page") : b.removeAttribute("aria-current"));
+    $("#v-title").textContent = v.title; $("#v-sub").textContent = v.sub;
+    $("#view").innerHTML = RENDER[ui.view]();
+    if (ui.view === "dashboard") loadHistory();
+    refreshDirty();
+  }
+
+  function refreshDirty() {
+    const d = dirtyFiles();
+    $("#dirty-badge").hidden = !d.length;
+    $("#discard-btn").hidden = !d.length;
+    $("#save-btn").disabled = !d.length;
+    if (d.length) $("#saved-badge").hidden = true;
+    document.querySelectorAll("[data-dot]").forEach(el => el.hidden = !isDirty(el.dataset.dot));
+  }
+
+  /* =========================================================
+     Field builders
+     ========================================================= */
+  function input(f, p, { label, type = "text", ph = "", hint = "", lang = "", mirror = "" } = {}) {
+    const v = getPath(M[f], p);
+    let control;
+    if (type === "area") control = `<textarea data-f="${f}" data-p="${p}" placeholder="${esc(ph)}" ${mirror ? `data-mirror="${mirror}"` : ""}>${esc(v)}</textarea>`;
+    else if (type === "num") control = `<input type="number" inputmode="numeric" min="0" data-t="num" data-f="${f}" data-p="${p}" value="${v ?? ""}" placeholder="${esc(ph)}">`;
+    else control = `<input type="${type === "url" ? "url" : "text"}" data-f="${f}" data-p="${p}" value="${esc(v)}" placeholder="${esc(ph)}" ${mirror ? `data-mirror="${mirror}"` : ""}>`;
+    return `<label class="fld"><span class="lbl">${esc(label)}${lang ? `<i class="lang">${lang}</i>` : ""}</span>${control}${hint ? `<small>${esc(hint)}</small>` : ""}</label>`;
+  }
+  const pair = (f, base, key, label, opts = {}) =>
+    `<div class="grid2">${input(f, P(base, key + "_vi"), { ...opts, label, lang: "VI", mirror: opts.mirror })}${input(f, P(base, key + "_en"), { ...opts, label, lang: "EN", mirror: "", ph: opts.phEn || "" })}</div>`;
+  function imageField(f, p, label, hint) {
+    const v = getPath(M[f], p);
+    return `<div class="imgfld">
+      <div class="ph" style="background-image:url('${esc(imgSrc(v))}')"></div>
+      <div><b>${esc(label)}</b><small>${esc(hint || "")}</small>
+        <button class="btn sm" data-act="pick-image" data-f="${f}" data-p="${p}">${ic("upload")}Đổi ảnh</button></div>
+    </div>`;
+  }
+  const moveBtns = (f, listPath, i, len, horiz) => `
+    <div class="row-acts">
+      <button class="icon-btn" data-act="up" data-f="${f}" data-p="${listPath}" data-i="${i}" ${i === 0 ? "disabled" : ""} title="Lên trước" aria-label="Lên trước">${ic(horiz ? "left" : "up")}</button>
+      <button class="icon-btn" data-act="down" data-f="${f}" data-p="${listPath}" data-i="${i}" ${i === len - 1 ? "disabled" : ""} title="Xuống sau" aria-label="Xuống sau">${ic(horiz ? "right" : "down")}</button>
+      <button class="icon-btn danger" data-act="del" data-f="${f}" data-p="${listPath}" data-i="${i}" title="Xóa" aria-label="Xóa">${ic("trash")}</button>
+    </div>`;
+
+  const TPL = {
+    category: () => ({ id: "nhom-" + Date.now().toString(36).slice(-4), name_vi: "Nhóm mới", name_en: "New category", items: [] }),
+    service: () => ({ name_vi: "Dịch vụ mới", name_en: "New service", duration_vi: "", duration_en: "", price: null, from: false, note_vi: "", note_en: "" }),
+    look: () => ({ image: "", name_vi: "", name_en: "" }),
+    ba: () => ({ image: "", title_vi: "", title_en: "", desc_vi: "", desc_en: "" }),
+    highlight: () => ({ image: "", label_vi: "", label_en: "", target: "#grid" }),
+    ticker: () => ({ vi: "", en: "" }),
+    promise: () => ({ title_vi: "", title_en: "", desc_vi: "", desc_en: "" }),
+    review: () => ({ quote_vi: "", quote_en: "", by_vi: "", by_en: "" }),
+    faq: () => ({ q_vi: "", q_en: "", a_vi: "", a_en: "" })
+  };
+
+  /* =========================================================
+     Views
+     ========================================================= */
+  const RENDER = {
+    dashboard() {
+      const s = M.services.categories || [], items = s.reduce((n, c) => n + (c.items || []).length, 0);
+      const g = M.gallery, x = M.extras;
+      const stat = (n, label, go, tab) => `<button class="stat" data-act="go" data-v="${go}" ${tab ? `data-tab="${tab}"` : ""}><b>${n}</b><span>${label}</span></button>`;
+      const q = (icon, title, sub, go, tab) => `<button data-act="go" data-v="${go}" ${tab ? `data-tab="${tab}"` : ""}><span class="ic">${ic(icon)}</span><span><b>${title}</b><small>${sub}</small></span></button>`;
+      return `
+        <section class="hello">
+          <div><h2>${isLocal ? "Xin chào 👋" : `Xin chào, ${esc(me.name)} 👋`}</h2>
+          <p>${isLocal ? "Bạn đang sửa trên máy tính. Thay đổi được ghi vào thư mục dự án." : "Mọi thay đổi bấm “Lưu & công bố” sẽ lên website sau khoảng 1 phút."}</p></div>
+          <a class="btn" href="${isLocal ? "/" : CONFIG.site}" target="_blank" rel="noopener">${ic("ext")}Mở website</a>
+        </section>
+        <div class="stats">
+          ${stat(items, `dịch vụ trong ${s.length} nhóm`, "services")}
+          ${stat((g.looks || []).length, "ảnh tác phẩm", "gallery", "looks")}
+          ${stat((g.before_after || []).length, "ảnh trước & sau", "gallery", "before_after")}
+          ${stat((x.reviews || []).length + " · " + (x.faq || []).length, "đánh giá · câu hỏi", "extras")}
+        </div>
+        <div class="dash-cols">
+          <section class="panel">
+            <div class="panel-h"><div><h2>Việc hay làm</h2><p>Bấm để đi thẳng tới phần cần sửa</p></div></div>
+            <div class="panel-b"><div class="quick">
+              ${q("tag", "Sửa giá dịch vụ", "Đổi giá, thêm dịch vụ mới", "services")}
+              ${q("image", "Thêm ảnh tác phẩm", "Đăng kiểu tóc mới làm", "gallery", "looks")}
+              ${q("clock", "Đổi giờ mở cửa", "Giờ làm, hotline, địa chỉ", "salon")}
+              ${q("star", "Thêm đánh giá khách", "Đánh giá, khuyến mãi, FAQ", "extras")}
+            </div></div>
+          </section>
+          <section class="panel">
+            <div class="panel-h"><div><h2>Thay đổi gần đây</h2><p>${isLocal ? "Chỉ có khi sửa trên website thật" : "Lịch sử lưu nội dung"}</p></div></div>
+            <ul class="timeline" id="history"><li class="empty">${isLocal ? "Ở chế độ máy tính không có lịch sử." : "Đang tải…"}</li></ul>
+          </section>
+        </div>`;
+    },
+
+    services() {
+      const cats = M.services.categories || [];
+      return cats.map((c, ci) => {
+        const base = `categories.${ci}`, items = c.items || [];
+        return `
+        <section class="panel">
+          <div class="cat-head">
+            ${input("services", P(base, "name_vi"), { label: "Tên nhóm", lang: "VI" })}
+            ${input("services", P(base, "name_en"), { label: "Tên nhóm", lang: "EN" })}
+            ${input("services", P(base, "id"), { label: "Mã nhóm", hint: "Không dấu, VD: colour" })}
+            ${moveBtns("services", "categories", ci, cats.length)}
+          </div>
+          <div>
+            ${items.map((it, ii) => {
+              const p = `${base}.items.${ii}`, key = `${ci}.${ii}`, open = ui.open.has(key);
+              return `
+              <div class="svc-row ${open ? "open" : ""}">
+                <div class="svc-sum">
+                  <span class="n">${ii + 1}</span>
+                  <div class="name"><b data-mirror-of="services:${p}.name_vi">${esc(it.name_vi || "(chưa đặt tên)")}</b><small>${esc(it.duration_vi || "—")}</small></div>
+                  <div class="fld price-in"><input type="number" inputmode="numeric" min="0" class="inline-input" data-t="num" data-f="services" data-p="${p}.price" value="${it.price ?? ""}" placeholder="Báo giá" aria-label="Giá (nghìn đồng)"></div>
+                  <label class="check"><input type="checkbox" data-f="services" data-p="${p}.from" ${it.from ? "checked" : ""}>“từ”</label>
+                  <div class="row-acts">
+                    <button class="icon-btn tog" data-act="toggle" data-key="${key}" title="Sửa tên, thời gian, mô tả" aria-label="Sửa chi tiết" aria-expanded="${open}">${ic("pencil")}</button>
+                    ${moveBtns("services", `${base}.items`, ii, items.length).replace('<div class="row-acts">', "").replace(/<\/div>\s*$/, "")}
+                  </div>
+                </div>
+                ${open ? `<div class="svc-edit">
+                  ${pair("services", p, "name", "Tên dịch vụ", { mirror: `services:${p}.name_vi` })}
+                  ${pair("services", p, "duration", "Thời gian", { ph: "VD: 60 phút, 2–3 giờ", phEn: "e.g. 60 min, 2–3 h" })}
+                  ${pair("services", p, "note", "Mô tả ngắn", { type: "area" })}
+                </div>` : ""}
+              </div>`;
+            }).join("") || `<div class="empty">Nhóm này chưa có dịch vụ.</div>`}
+          </div>
+          <div class="panel-f"><button class="btn sm" data-act="add" data-f="services" data-p="${base}.items" data-tpl="service">${ic("plus")}Thêm dịch vụ</button></div>
+        </section>`;
+      }).join("") + `
+        <button class="add-row" data-act="add" data-f="services" data-p="categories" data-tpl="category">${ic("plus")}Thêm nhóm dịch vụ</button>
+        <p class="hint-line">Giá nhập theo nghìn đồng (699 = 699.000₫). Để trống giá thì website hiện “Báo giá”. Tick “từ” để hiện “từ 699K”.</p>`;
+    },
+
+    gallery() {
+      const g = M.gallery;
+      const tabs = [["looks", "Tác phẩm"], ["before_after", "Trước & sau"], ["highlights", "Vòng tròn đầu trang"]];
+      const list = g[ui.gtab] || [];
+      const lp = ui.gtab;
+      const targets = [...(M.services.categories || []).map(c => [c.id, "Bảng giá · " + (c.name_vi || c.id)]),
+        ["#before-after", "Phần Trước & sau"], ["#grid", "Phần Tác phẩm"], ["#space", "Phần Không gian"], ["#visit", "Phần Ghé tiệm"]];
+      const card = (it, i) => {
+        let fields = "";
+        if (lp === "looks") fields = input("gallery", `${lp}.${i}.name_vi`, { label: "Tên kiểu tóc", lang: "VI" }) + input("gallery", `${lp}.${i}.name_en`, { label: "Tên kiểu tóc", lang: "EN" });
+        if (lp === "before_after") fields = input("gallery", `${lp}.${i}.title_vi`, { label: "Tiêu đề", lang: "VI" }) + input("gallery", `${lp}.${i}.title_en`, { label: "Tiêu đề", lang: "EN" })
+          + input("gallery", `${lp}.${i}.desc_vi`, { label: "Mô tả", lang: "VI" }) + input("gallery", `${lp}.${i}.desc_en`, { label: "Mô tả", lang: "EN" });
+        if (lp === "highlights") fields = input("gallery", `${lp}.${i}.label_vi`, { label: "Nhãn", lang: "VI" }) + input("gallery", `${lp}.${i}.label_en`, { label: "Nhãn", lang: "EN" })
+          + `<label class="fld"><span class="lbl">Bấm vào thì đi tới</span><select data-f="gallery" data-p="${lp}.${i}.target">
+              ${targets.map(([v, l]) => `<option value="${esc(v)}" ${it.target === v ? "selected" : ""}>${esc(l)}</option>`).join("")}
+              ${targets.some(([v]) => v === it.target) ? "" : `<option selected value="${esc(it.target)}">${esc(it.target || "(chưa chọn)")}</option>`}
+            </select></label>`;
+        return `
+          <article class="card">
+            <div class="thumb" data-thumb="gallery:${lp}.${i}.image">
+              ${it.image ? `<img src="${esc(imgSrc(it.image))}" alt="" loading="lazy">` : `<span>${ic("image")}</span>`}
+              <span class="idx">${i + 1}</span>
+              <button class="btn sm pick" data-act="pick-image" data-f="gallery" data-p="${lp}.${i}.image">${ic("upload")}${it.image ? "Đổi ảnh" : "Chọn ảnh"}</button>
+            </div>
+            <div class="body">${fields}</div>
+            <div class="foot"><span class="sp"></span>${moveBtns("gallery", lp, i, list.length, true)}</div>
+          </article>`;
+      };
+      const hint = { looks: "Nên để số ảnh chia hết cho 3 (6, 9, 12…) cho lưới đều. Ảnh vuông đẹp nhất.",
+                     before_after: "Dùng ảnh ghép trước/sau, khung vuông.",
+                     highlights: "Các vòng tròn kiểu story Instagram dưới phần đầu trang." }[lp];
+      return `
+        <div class="tabs" role="tablist">${tabs.map(([k, l]) => `<button role="tab" aria-selected="${ui.gtab === k}" data-act="gtab" data-tab="${k}">${l}<span class="cnt">${(g[k] || []).length}</span></button>`).join("")}</div>
+        <p class="hint-line">${hint}</p>
+        <div class="cards">
+          ${list.map(card).join("")}
+          <button class="add-card" data-act="add-image" data-f="gallery" data-p="${lp}" data-tpl="${{ looks: "look", before_after: "ba", highlights: "highlight" }[lp]}">${ic("plus")}<span>Thêm ảnh</span></button>
+        </div>`;
+    },
+
+    salon() {
+      const f = "salon";
+      return `
+        <section class="panel"><div class="panel-h"><div><h2>Thông tin chung</h2><p>Tên và slogan hiện ở đầu trang và chân trang</p></div></div>
+          <div class="panel-b">${input(f, "name", { label: "Tên tiệm" })}${pair(f, "", "slogan", "Slogan")}</div></section>
+        <section class="panel"><div class="panel-h"><div><h2>Địa chỉ & liên hệ</h2></div></div>
+          <div class="panel-b">
+            <div class="grid2">${input(f, "address", { label: "Số nhà, đường", ph: "284 Quang Trung" })}${input(f, "hotline", { label: "Hotline", ph: "033 318 8683" })}</div>
+            ${pair(f, "", "city", "Quận, thành phố")}
+            ${input(f, "map", { label: "Link Google Maps", type: "url" })}
+          </div></section>
+        <section class="panel"><div class="panel-h"><div><h2>Giờ mở cửa</h2></div></div>
+          <div class="panel-b">${pair(f, "", "hours", "Giờ mở cửa", { ph: "8:30 – 21:00 hằng ngày", phEn: "8:30 – 21:00 daily" })}</div></section>
+        <section class="panel"><div class="panel-h"><div><h2>Mạng xã hội & đặt lịch</h2><p>Nút Messenger và Zalo trong phần đặt lịch dùng các link này</p></div></div>
+          <div class="panel-b">${input(f, "facebook", { label: "Facebook", type: "url" })}
+            <div class="grid2">${input(f, "messenger", { label: "Messenger", type: "url", hint: "Dạng https://m.me/…" })}${input(f, "zalo", { label: "Zalo", type: "url", hint: "Dạng https://zalo.me/số-điện-thoại" })}</div></div></section>
+        <section class="panel"><div class="panel-h"><div><h2>Số liệu hiển thị</h2><p>Lấy từ trang Facebook của tiệm</p></div></div>
+          <div class="panel-b"><div class="grid3">${input(f, "recommend", { label: "Tỉ lệ đề xuất", ph: "100%" })}${input(f, "reviews", { label: "Số đánh giá", ph: "38" })}${input(f, "followers", { label: "Người theo dõi", ph: "3,2K" })}</div></div></section>
+        <section class="panel"><div class="panel-h"><div><h2>Ảnh chính</h2></div></div>
+          <div class="panel-b">
+            ${imageField(f, "hero_image", "Ảnh lớn đầu trang", "Ảnh dọc, tỉ lệ 4:5")}
+            ${pair(f, "", "hero_caption", "Chú thích ảnh đầu trang", { type: "area" })}
+            <div class="grid2">${imageField(f, "space_image_1", "Không gian tiệm · ảnh ngang", "Tỉ lệ 16:10")}${imageField(f, "space_image_2", "Không gian tiệm · ảnh vuông 1", "Ảnh vuông")}</div>
+            <div class="grid2">${imageField(f, "space_image_3", "Không gian tiệm · ảnh vuông 2", "Ảnh vuông")}${imageField(f, "storefront_image", "Ảnh mặt tiền", "Phần Ghé tiệm")}</div>
+          </div></section>`;
+    },
+
+    extras() {
+      const f = "extras", x = M.extras;
+      const block = (key, title, sub, tpl, itemLabel, body) => `
+        <section class="panel"><div class="panel-h"><div><h2>${title}</h2><p>${sub}</p></div><div class="right"><span class="badge ok" style="background:var(--panel-2);color:var(--muted)">${(x[key] || []).length} mục</span></div></div>
+          <div class="panel-b">
+            ${(x[key] || []).map((it, i) => `<div class="item"><div class="item-h"><b>${itemLabel} ${i + 1}</b>${moveBtns(f, key, i, x[key].length)}</div><div class="item-b">${body(`${key}.${i}`)}</div></div>`).join("")}
+            <button class="add-row" data-act="add" data-f="${f}" data-p="${key}" data-tpl="${tpl}">${ic("plus")}Thêm ${itemLabel.toLowerCase()}</button>
+          </div></section>`;
+      return block("ticker", "Dòng chữ chạy", "Băng chữ đỏ chạy ngang dưới phần đầu trang. Hợp để ghi khuyến mãi.", "ticker", "Dòng",
+          p => `<div class="grid2">${input(f, p + ".vi", { label: "Nội dung", lang: "VI" })}${input(f, p + ".en", { label: "Nội dung", lang: "EN" })}</div>`)
+        + block("promises", "Cam kết", "Hiện trong phần Không gian & cam kết.", "promise", "Cam kết",
+          p => pair(f, p, "title", "Tiêu đề") + pair(f, p, "desc", "Mô tả"))
+        + block("reviews", "Đánh giá của khách", "Nên ghi tên viết tắt của khách để tôn trọng quyền riêng tư.", "review", "Đánh giá",
+          p => pair(f, p, "quote", "Lời đánh giá", { type: "area" }) + pair(f, p, "by", "Người đánh giá", { ph: "Khách hàng T.D. · Facebook" }))
+        + block("faq", "Câu hỏi thường gặp", "Câu hỏi đầu tiên được mở sẵn trên website.", "faq", "Câu hỏi",
+          p => pair(f, p, "q", "Câu hỏi") + pair(f, p, "a", "Trả lời", { type: "area" }));
+    }
+  };
+
+  async function loadHistory() {
+    const el = $("#history"); if (!el || isLocal) return;
+    try {
+      const list = await backend.history();
+      el.innerHTML = list.length ? list.map(c => `
+        <li>${c.author?.avatar_url ? `<img src="${esc(c.author.avatar_url)}" alt="">` : ""}
+          <div><b>${esc(c.commit.message.split("\n")[0])}</b><small>${esc(c.author?.login || c.commit.author.name)} · ${ago(c.commit.author.date)}</small></div></li>`).join("")
+        : `<li class="empty">Chưa có thay đổi nào.</li>`;
+    } catch (_) { el.innerHTML = `<li class="empty">Không tải được lịch sử.</li>`; }
+  }
+
+  /* =========================================================
+     Events
+     ========================================================= */
+  document.addEventListener("input", e => {
+    const el = e.target.closest("[data-f][data-p]"); if (!el || !M[el.dataset.f]) return;
+    const v = el.type === "checkbox" ? el.checked : el.dataset.t === "num" ? (el.value === "" ? null : Math.max(0, Math.round(Number(el.value)))) : el.value;
+    setPath(M[el.dataset.f], el.dataset.p, v);
+    if (el.dataset.mirror) document.querySelectorAll(`[data-mirror-of="${el.dataset.mirror}"]`).forEach(n => n.textContent = el.value || "(chưa đặt tên)");
+    refreshDirty();
+  });
+  document.addEventListener("change", e => { if (e.target.matches("select[data-f], input[type=checkbox][data-f]")) e.target.dispatchEvent(new Event("input", { bubbles: true })); });
+
+  let pendingImage = null;
+  document.addEventListener("click", async e => {
+    const b = e.target.closest("[data-act]"); if (!b) return;
+    const { act, f, p } = b.dataset, i = Number(b.dataset.i);
+    const list = f && p !== undefined ? getPath(M[f], p) : null;
+    switch (act) {
+      case "go":
+        ui.view = b.dataset.v; if (b.dataset.tab) ui.gtab = b.dataset.tab;
+        history.replaceState(null, "", "#" + ui.view); renderView(); window.scrollTo(0, 0); break;
+      case "gtab": ui.gtab = b.dataset.tab; renderView(); break;
+      case "toggle": ui.open.has(b.dataset.key) ? ui.open.delete(b.dataset.key) : ui.open.add(b.dataset.key); renderView(); break;
+      case "up": case "down": {
+        const j = act === "up" ? i - 1 : i + 1; if (j < 0 || j >= list.length) return;
+        [list[i], list[j]] = [list[j], list[i]]; ui.open.clear(); renderView(); break;
+      }
+      case "del":
+        if (!confirm("Xóa mục này? Bạn vẫn có thể bấm “Hoàn tác” trước khi lưu.")) return;
+        list.splice(i, 1); ui.open.clear(); renderView(); break;
+      case "add": {
+        list.push(TPL[b.dataset.tpl]());
+        if (b.dataset.tpl === "service") { const ci = p.split(".")[1]; ui.open.add(`${ci}.${list.length - 1}`); }
+        renderView(); break;
+      }
+      case "add-image":
+        list.push(TPL[b.dataset.tpl]());
+        renderView();
+        pendingImage = { f, p: `${p}.${list.length - 1}.image`, isNew: true, listPath: p };
+        $("#img-input").value = ""; $("#img-input").click(); break;
+      case "pick-image":
+        pendingImage = { f, p }; $("#img-input").value = ""; $("#img-input").click(); break;
+      case "discard":
+        if (!confirm("Bỏ tất cả thay đổi chưa lưu?")) return;
+        for (const k of dirtyFiles()) M[k] = JSON.parse(ORIG[k]);
+        renderView(); toast("Đã hoàn tác các thay đổi chưa lưu."); break;
+      case "save": save(); break;
+      case "logout":
+        if (dirtyFiles().length && !confirm("Bạn có thay đổi chưa lưu. Vẫn đăng xuất?")) return;
+        store.set(TOKEN_KEY, null); location.reload(); break;
+    }
+  });
+
+  /* Image upload: resize in the browser, then commit to /photos/uploads */
+  function resize(file, max = 1600) {
+    return new Promise((resolve, reject) => {
+      const url = URL.createObjectURL(file), im = new Image();
+      im.onload = () => {
+        const k = Math.min(1, max / Math.max(im.width, im.height));
+        const c = document.createElement("canvas"); c.width = Math.round(im.width * k); c.height = Math.round(im.height * k);
+        c.getContext("2d").drawImage(im, 0, 0, c.width, c.height);
+        const dataUrl = c.toDataURL("image/jpeg", 0.85);
+        resolve({ base64: dataUrl.split(",")[1], preview: dataUrl });
+        URL.revokeObjectURL(url);
+      };
+      im.onerror = () => reject(new Error("image"));
+      im.src = url;
+    });
+  }
+  $("#img-input").addEventListener("change", async () => {
+    const file = $("#img-input").files[0], target = pendingImage; pendingImage = null;
+    if (!target) return;
+    if (!file) {
+      // Picker cancelled for a brand-new card: remove the empty card again
+      if (target.isNew) { const l = getPath(M[target.f], target.listPath); if (!l[l.length - 1].image) l.pop(); renderView(); }
+      return;
+    }
+    const thumb = document.querySelector(`[data-thumb="${target.f}:${target.p}"]`);
+    if (thumb) thumb.insertAdjacentHTML("beforeend", `<div class="uploading">Đang tải ảnh…</div>`);
+    try {
+      const { base64, preview } = await resize(file);
+      const name = `${slug(file.name.replace(/\.[^.]+$/, ""))}-${Date.now().toString(36)}.jpg`;
+      await backend.upload(`photos/uploads/${name}`, base64, `Tải ảnh ${name} (portal)`);
+      const path = `/photos/uploads/${name}`;
+      PREVIEW[path] = preview;
+      setPath(M[target.f], target.p, path);
+      renderView();
+      toast("Đã tải ảnh lên. Nhớ bấm “Lưu & công bố”.");
+    } catch (err) {
+      renderView();
+      toast("Không tải được ảnh. Kiểm tra mạng rồi thử lại.", "err");
+    }
+  });
+  // Cancel detection for the file picker (fires on focus return without a change event)
+  $("#img-input").addEventListener("cancel", () => $("#img-input").dispatchEvent(new Event("change")));
+
+  async function save() {
+    const files = dirtyFiles(); if (!files.length) return;
+    const btn = $("#save-btn"); btn.disabled = true; btn.innerHTML = `<span class="spin" style="width:16px;height:16px;border-width:2px"></span>Đang lưu…`;
+    try {
+      for (const f of files) {
+        const text = JSON.stringify(M[f], null, 2) + "\n";
+        SHA[f] = await backend.write(FILES[f].path, text, SHA[f], `Cập nhật ${FILES[f].label} (portal)`);
+        ORIG[f] = JSON.stringify(M[f]);
+      }
+      toast(isLocal ? "Đã lưu vào máy tính." : "Đã lưu. Website sẽ cập nhật sau khoảng 1 phút.");
+      $("#saved-badge").hidden = false;
+      if (ui.view === "dashboard") loadHistory();
+    } catch (err) {
+      if (err.status === 409 || err.status === 422) toast("Nội dung vừa được sửa ở nơi khác. Hãy tải lại trang để lấy bản mới nhất rồi sửa lại.", "err");
+      else if (err.status === 401) { toast("Phiên đăng nhập đã hết hạn. Hãy đăng nhập lại.", "err"); store.set(TOKEN_KEY, null); }
+      else toast("Chưa lưu được. Kiểm tra mạng rồi bấm lưu lại.", "err");
+    } finally {
+      btn.innerHTML = `${ic("check")}Lưu &amp; công bố`;
+      refreshDirty();
+    }
+  }
+
+  window.addEventListener("beforeunload", e => { if (Object.keys(M).length && dirtyFiles().length) { e.preventDefault(); e.returnValue = ""; } });
+
+  /* =========================================================
+     Login + boot
+     ========================================================= */
+  function renderLogin(msg = "", kind = "err") {
+    $("#root").innerHTML = `
+      <div class="login"><div class="login-card">
+        <div class="brand">long hair<span>.</span></div>
+        <div><h1>Quản trị website</h1><p>${isLocal ? "Chế độ máy tính: nội dung được ghi thẳng vào thư mục dự án." : "Đăng nhập bằng tài khoản GitHub đã được cấp quyền sửa website."}</p></div>
+        ${msg ? `<div class="alert ${kind}">${msg}</div>` : ""}
+        ${isLocal
+          ? `<button class="btn dark lg" data-login="local">Vào chế độ máy tính</button>`
+          : `<button class="btn dark lg" data-login="github">${GH_MARK}Đăng nhập bằng GitHub</button>`}
+        <div class="login-foot"><a href="${isLocal ? "/" : CONFIG.site}">← Về website</a><span>Long Hair Salon</span></div>
+      </div></div>`;
+    $("[data-login]").addEventListener("click", async ev => {
+      const btn = ev.currentTarget; btn.disabled = true;
+      try {
+        if (btn.dataset.login === "github") { GitHub.token = await githubLogin(); store.set(TOKEN_KEY, GitHub.token); backend = GitHub; }
+        else backend = Local;
+        await start();
+      } catch (err) { btn.disabled = false; renderLogin(loginError(err)); }
+    });
+  }
+  function loginError(err) {
+    if (err.message === "popup") return "Trình duyệt đã chặn cửa sổ đăng nhập. Cho phép cửa sổ bật lên (pop-up) cho trang này rồi thử lại.";
+    if (err.message === "closed") return "Cửa sổ đăng nhập đã đóng trước khi hoàn tất. Nếu cửa sổ báo “Not Found”, cần cài đặt GitHub OAuth trên Netlify (xem HUONG-DAN.md, Bước 4).";
+    if (err.message === "no-push") return `Tài khoản <b>@${esc(err.login)}</b> chưa có quyền sửa website. Nhờ chủ repo thêm bạn làm Collaborator trên GitHub.`;
+    if (err.message === "auth") return "GitHub từ chối đăng nhập. Kiểm tra cài đặt OAuth trên Netlify (xem HUONG-DAN.md).";
+    if (isLocal) return "Không kết nối được máy chủ trên máy. Hãy chạy <code>npx decap-server</code> trong thư mục dự án rồi thử lại.";
+    return "Không đăng nhập được. Kiểm tra mạng rồi thử lại.";
+  }
+
+  async function start() {
+    $("#root").innerHTML = `<div class="loading"><div class="spin"></div><span>Đang tải nội dung…</span></div>`;
+    me = await backend.user();
+    await loadAll();
+    renderShell();
+  }
+
+  (async () => {
+    const token = store.get(TOKEN_KEY);
+    if (!isLocal && token) {
+      GitHub.token = token; backend = GitHub;
+      try { await start(); return; }
+      catch (err) { store.set(TOKEN_KEY, null); return renderLogin(err.status === 401 ? "Phiên đăng nhập đã hết hạn. Hãy đăng nhập lại." : loginError(err)); }
+    }
+    renderLogin();
+  })();
+})();
+</script>
 </body>
 </html>

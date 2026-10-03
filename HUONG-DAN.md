@@ -11,7 +11,8 @@
 | `content/extras.json` | Dòng chữ chạy, cam kết, đánh giá, câu hỏi thường gặp |
 | `photos/` | Ảnh của web. Ảnh tải lên qua trang quản trị nằm trong `photos/uploads/` |
 | `photos/fb/` | 111 ảnh gốc lấy từ Facebook (không dùng trực tiếp trên web) |
-| `admin/` | Trang quản trị (Decap CMS) |
+| `admin/index.html` | Portal quản trị riêng của Long Hair |
+| `admin/decap/` | Trang quản trị dự phòng (Decap CMS), dùng khi portal gặp lỗi |
 
 Bình thường bạn **không cần sửa file nào**. Mọi nội dung đều sửa được ở trang `/admin`.
 
@@ -27,13 +28,12 @@ Cần 2 tài khoản miễn phí: **GitHub** (lưu code) và **Netlify** (chạy
 3. Cài **GitHub Desktop** (https://desktop.github.com), chọn *Add existing repository* → thư mục `salon_hair` → *Publish repository*.
    (Nếu dùng dòng lệnh: `git init`, `git add .`, `git commit -m "Website Long Hair Salon"`, rồi `git remote add origin …` và `git push -u origin main`.)
 
-### Bước 2. Sửa tên repo trong cấu hình admin
-Mở `admin/config.yml`, sửa 2 chỗ có dấu ←:
-```yaml
-repo: TEN-GITHUB-CUA-BAN/long-hair-salon
-site_url: https://ten-web-cua-ban.netlify.app
-```
-Lưu lại rồi đẩy lên GitHub (GitHub Desktop: *Commit* → *Push*).
+### Bước 2. Cấu hình repo cho trang quản trị (đã làm sẵn)
+Tên repo và địa chỉ web nằm ở 2 chỗ, đã điền sẵn `duongduc2908/salon_hair` và `https://profound-unicorn-9725a5.netlify.app`:
+- `admin/index.html`, phần `CONFIG` ở đầu đoạn script (portal chính)
+- `admin/decap/config.yml` (trang dự phòng)
+
+Nếu sau này đổi tên web Netlify hoặc chuyển repo, sửa cả 2 chỗ này.
 
 ### Bước 3. Tạo web trên Netlify
 1. Đăng nhập https://app.netlify.com bằng tài khoản GitHub.
@@ -58,18 +58,25 @@ Mở `https://ten-web-cua-ban.netlify.app/admin/` → **Đăng nhập bằng Git
 
 ## Dùng trang quản trị hằng ngày
 
-1. Vào `/admin/` và đăng nhập.
-2. Chọn mục ở cột trái: **Thông tin tiệm**, **Bảng giá**, **Ảnh**, **Cam kết, đánh giá, FAQ**.
-3. Sửa nội dung. Mỗi mục có ô **tiếng Việt** và ô **tiếng Anh** riêng.
-4. Bấm **Công bố** (Publish) ở góc trên. Khoảng 1 phút sau web tự cập nhật.
+Địa chỉ: **https://profound-unicorn-9725a5.netlify.app/admin/** → **Đăng nhập bằng GitHub**.
+
+| Mục | Làm được gì |
+|---|---|
+| **Tổng quan** | Số dịch vụ, số ảnh, lối tắt tới việc hay làm, lịch sử các lần lưu |
+| **Bảng giá** | Sửa giá ngay trên dòng; bấm ✏️ để sửa tên, thời gian, mô tả (VI + EN); ↑ ↓ đổi thứ tự; 🗑 xóa; thêm dịch vụ, thêm nhóm |
+| **Ảnh** | 3 thẻ: Tác phẩm, Trước & sau, Vòng tròn đầu trang. Bấm “Đổi ảnh” hoặc “Thêm ảnh”, ảnh được tự thu nhỏ trước khi tải lên |
+| **Thông tin tiệm** | Tên, slogan, địa chỉ, hotline, giờ mở cửa, link Facebook/Messenger/Zalo/Maps, số liệu, ảnh chính |
+| **Cam kết & đánh giá** | Dòng chữ chạy (khuyến mãi), cam kết, đánh giá của khách, câu hỏi thường gặp |
+
+Sửa xong bấm **Lưu & công bố** ở góc trên bên phải. Khoảng 1 phút sau website cập nhật.
+Chấm vàng cạnh tên mục ở menu trái = mục đó có thay đổi chưa lưu. **Hoàn tác** bỏ mọi thay đổi chưa lưu.
 
 **Mẹo:**
-- **Giá** nhập theo nghìn đồng: `699` hiển thị là `699K`. Để trống ô giá thì web hiện "Báo giá".
-- **Thứ tự**: kéo biểu tượng ═ để đổi thứ tự dịch vụ, ảnh, câu hỏi.
-- **Ảnh**: nên dùng ảnh vuông cho lưới tác phẩm và ảnh trước/sau, ảnh dọc 4:5 cho ảnh đầu trang. Ảnh dưới 500 KB giúp web tải nhanh.
+- **Giá** nhập theo nghìn đồng: `699` hiển thị là `699K`. Để trống ô giá thì web hiện "Báo giá". Tick **“từ”** để hiện “từ 699K”.
+- **Ảnh**: ảnh vuông cho lưới tác phẩm và trước/sau, ảnh dọc 4:5 cho ảnh đầu trang. Ảnh tải lên nằm trong `photos/uploads/`.
 - **Lưới tác phẩm**: để số ảnh chia hết cho 3 (6, 9, 12…) cho lưới đều.
-- **Vòng tròn đầu trang**: ô "Bấm vào thì đi tới" điền mã nhóm dịch vụ (`cut`, `perm`, `colour`, `care`) để mở bảng giá nhóm đó, hoặc `#before-after`, `#grid`, `#space`, `#visit` để nhảy tới phần tương ứng.
-- **Lịch sử**: mọi thay đổi được lưu trên GitHub, có thể khôi phục bản cũ nếu sửa nhầm.
+- **Lịch sử**: mỗi lần lưu là một commit trên GitHub, có thể khôi phục bản cũ nếu sửa nhầm.
+- **Dự phòng**: nếu portal gặp lỗi, vẫn sửa được ở `/admin/decap/` (Decap CMS, cùng nội dung).
 
 Những chữ cố định của giao diện (tiêu đề các phần, nhãn nút) nằm trong `index.html`, phần `STR` ở cuối file.
 
@@ -82,6 +89,6 @@ Trong thư mục `salon_hair`, mở 2 cửa sổ Terminal:
 npx decap-server            # cửa sổ 1
 python3 -m http.server 8000 # cửa sổ 2
 ```
-Mở http://localhost:8000/admin/ → *Đăng nhập* (không cần mật khẩu khi chạy trên máy). Thay đổi được ghi thẳng vào các file trong `content/`. Xem web ở http://localhost:8000.
+Mở http://localhost:8000/admin/ → **Vào chế độ máy tính** (không cần mật khẩu). Thay đổi được ghi thẳng vào các file trong `content/`. Xem web ở http://localhost:8000.
 
 Lưu ý: không mở trực tiếp file `index.html` bằng cách nhấp đúp, vì trình duyệt sẽ chặn việc đọc file `content/*.json`. Luôn mở qua `http://localhost:8000`.
